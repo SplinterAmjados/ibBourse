@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "VenteValeur";
+    Layout = "~/Views/_layout.cshtml";
+    ViewBag.passageOrdre = "active";
+
+}
+
+@section others_javascripts
+{
+    <script src="~/Scripts/regles_passage_ordre.js"></script>
+    <script>
+        var titres = @Html.Raw(ViewBag.mesValeurs) ;
+        var i = 0;
+        for (i = 0 ; i<titres.length ; i++)
+        {
+            $('#mesValeurs').append("<option value='"+titres[i].cod_valeur.trim()+"'>"+titres[i].valeur.trim()+" ( "+titres[i].qte+" )</option>") ;
+        }
+
+    </script>
+}
+
+<a href="/Home/PassageOrdre">
+    <div class="banim_right_to_left">
+        <h2  style="text-align: left;"><< Passer un ordre</h2>
+    </div>
+</a>
+<br />
+
+@{
+    try{
+    foreach ( var e in ViewBag.erreurs )
+    {
+       @e <br />
+    }
+    }catch(Exception e)
+    {}
+}
+
+<div>
+    <form enctype="multipart/form-data" method="POST" id="form_vente" action="/Home/VenteValeurPost" >
+        <div class="wsite-form-container" style="margin-top: 10px;">
+            <ul class="formlist">
+                <h2 class="wsite-content-title" style="text-align: left;">Vente Valeur</h2>
+                <div>
+                    <div class="wsite-multicol">
+                        <div class="wsite-multicol-table-wrap" style="margin: 0 -15px;">
+                            <table class="wsite-multicol-table">
+                                <tbody class="wsite-multicol-tbody">
+                                    <tr class="wsite-multicol-tr">
+                                        <td class="wsite-multicol-col" style="width: 50%; padding: 0 15px;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 0px 0px;">
+                                                    <label class="wsite-form-label">Valeur <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-radio-container">
+                                                        <select class='form-select' id="mesValeurs" name="valeur">
+                                                            
+                                                        </select>
+                                                    </div>
+                                                    <div id="instructions-Valeur" class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="wsite-multicol-col" style="width: 50%; padding: 0 15px;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label">Nombre d'actions <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-input-container">
+                                                        <input class="wsite-form-input wsite-input wsite-input-width-100px" type="number" name="nbre_actions" />
+                                                    </div>
+                                                    <div class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="wsite-multicol">
+                        <div class="wsite-multicol-table-wrap" style="margin: 0 -15px;">
+                            <table class="wsite-multicol-table">
+                                <tbody class="wsite-multicol-tbody">
+                                    <tr class="wsite-multicol-tr">
+                                        <td class="wsite-multicol-col" style="width: 50%; padding: 0 15px;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label">Type d'odre <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-radio-container">
+                                                        <select id="type_ordre" class='form-select' name="type_ordre">
+                                                            <option value='1'>Limité</option>
+                                                            <option value='2'>Au cours d'ouverture</option>
+                                                            <option value='3'>A la meilleur limite</option>
+                                                            <option value='4'>ATP</option>
+                                                            <option value='5'>Stop Loss</option>
+                                                            <option value='6'>Stop Limit</option>
+                                                        </select>
+
+                                                    </div>
+                                                    <div id="instructions-Type d'odre" class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td id="cours_ordre_div" class="wsite-multicol-col" style="padding: 0 15px;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label">Cours <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-input-container">
+                                                        <input class="wsite-form-input wsite-input wsite-input-width-100px" type="text" name="cours" />
+                                                    </div>
+                                                    <div class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td id="valeur_stop_div" style="display: none;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label">Valeur de déclenchement <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-input-container">
+                                                        <input class="wsite-form-input wsite-input wsite-input-width-100px" type="text" name="_u205971197880248636" />
+                                                    </div>
+                                                    <div class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+        <div style="display: none; visibility: hidden;">
+            <input type="text" name="wsite_subject" />
+        </div>
+        <div style="text-align: left; margin-top: 10px; margin-bottom: 10px;">
+            <input type="hidden" name="form_version" value="2" />
+            <input type="hidden" name="wsite_approved" id="wsite-approved" value="approved" />
+            <input type="hidden" name="ucfid" value="891282455498669711" />
+            <input type='submit' style='position: absolute; top: 0; left: -9999px; width: 1px; height: 1px' />
+            <a class='wsite-button' onclick="document.getElementById('form_vente').submit()"><span class='wsite-button-inner'>Soumettre</span></a>
+        </div>
+    </form>
+
+
+</div>

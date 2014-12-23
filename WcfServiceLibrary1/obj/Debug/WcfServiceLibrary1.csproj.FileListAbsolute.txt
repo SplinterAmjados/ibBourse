@@ -1,0 +1,15 @@
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\WcfServiceLibrary1.dll.config
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\WcfServiceLibrary1.dll
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\WcfServiceLibrary1.pdb
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\obj\Debug\WcfServiceLibrary1.dll
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\obj\Debug\WcfServiceLibrary1.pdb
+C:\Users\Splinter\Documents\Visual Studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\obj\Debug\WcfServiceLibrary1.csprojResolveAssemblyReference.cache
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\DomainApplication.exe
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\EntityFramework.dll
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\DomainApplication.pdb
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\EntityFramework.xml
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\QuickFix.dll
+C:\Users\Splinter\Documents\Visual Studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\FixInitiator.exe
+C:\Users\Splinter\Documents\Visual Studio 2012\Projects\MarcheFinancier\WcfServiceLibrary1\bin\Debug\FixInitiator.pdb

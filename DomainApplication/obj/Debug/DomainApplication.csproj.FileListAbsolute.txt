@@ -1,0 +1,10 @@
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\bin\Debug\DomainApplication.exe.config
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\bin\Debug\DomainApplication.exe
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\bin\Debug\DomainApplication.pdb
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\bin\Debug\EntityFramework.dll
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\bin\Debug\EntityFramework.xml
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\obj\Debug\DomainApplication.csprojResolveAssemblyReference.cache
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\obj\Debug\DomainApplication.exe
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\obj\Debug\DomainApplication.pdb
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Splinter\documents\visual studio 2012\Projects\MarcheFinancier\DomainApplication\bin\Debug\Newtonsoft.Json.xml

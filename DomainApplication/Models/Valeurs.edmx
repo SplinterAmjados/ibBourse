@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IBDModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="IBDModelStoreContainer">
+          <EntitySet Name="clients" EntityType="IBDModel.Store.clients" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="recap_valeurs" EntityType="IBDModel.Store.recap_valeurs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="valeurs_client" EntityType="IBDModel.Store.valeurs_client" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="fk_1" Association="IBDModel.Store.fk_1">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="valeurs_client" EntitySet="valeurs_client" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nom" Type="nchar" MaxLength="50" />
+          <Property Name="login" Type="nchar" MaxLength="20" />
+          <Property Name="password" Type="nchar" MaxLength="60" />
+          <Property Name="solde" Type="float" />
+        </EntityType>
+        <EntityType Name="recap_valeurs">
+          <Key>
+            <PropertyRef Name="SEANCE" />
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="SEANCE" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="GROUPE" Type="nvarchar" MaxLength="255" />
+          <Property Name="CODE" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="VALEUR" Type="nvarchar" MaxLength="50" />
+          <Property Name="COURS_REF" Type="nvarchar" MaxLength="255" />
+          <Property Name="COURS_VEILLE" Type="nvarchar" MaxLength="255" />
+          <Property Name="OUV" Type="nvarchar" MaxLength="255" />
+          <Property Name="PLUS_BAS" Type="nvarchar" MaxLength="255" />
+          <Property Name="PLUS_HAUT" Type="nvarchar" MaxLength="255" />
+          <Property Name="CLOTURE" Type="nvarchar" MaxLength="255" />
+          <Property Name="P_MOY_POND" Type="nvarchar" MaxLength="255" />
+          <Property Name="I_RES" Type="nvarchar" MaxLength="255" />
+          <Property Name="SEUIL_BAS" Type="nvarchar" MaxLength="255" />
+          <Property Name="SEUIL_HAUT" Type="nvarchar" MaxLength="255" />
+          <Property Name="QTTE_TOT" Type="nvarchar" MaxLength="255" />
+          <Property Name="VOLUME_TOT" Type="nvarchar" MaxLength="255" />
+          <Property Name="QTE_SANS_BLOC" Type="nvarchar" MaxLength="255" />
+          <Property Name="TOT_SANS_BLOC" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="valeurs_client">
+          <Key>
+            <PropertyRef Name="valeur" />
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="valeur" Type="nchar" Nullable="false" MaxLength="50" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="qte" Type="nchar" MaxLength="10" />
+          <Property Name="cod_valeur" Type="nchar" Nullable="false" MaxLength="7" />
+        </EntityType>
+        <Association Name="fk_1">
+          <End Role="clients" Type="IBDModel.Store.clients" Multiplicity="1" />
+          <End Role="valeurs_client" Type="IBDModel.Store.valeurs_client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="valeurs_client">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IBDModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="IBEntitiesConnection" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="valeurs" EntityType="IBDModel.Valeur" />
+          <EntitySet Name="Clients" EntityType="IBDModel.Client" />
+          <EntitySet Name="ValeursClients" EntityType="IBDModel.ValeursClient" />
+          <AssociationSet Name="fk_1" Association="IBDModel.fk_1">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="valeurs_client" EntitySet="ValeursClients" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Valeur">
+          <Key>
+            <PropertyRef Name="SEANCE" />
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="SEANCE" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="GROUPE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CODE" Type="String" Nullable="false" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="VALEUR" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="COURS_REF" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="COURS_VEILLE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="OUV" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="PLUS_BAS" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="PLUS_HAUT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CLOTURE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="P_MOY_POND" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="I_RES" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="SEUIL_BAS" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="SEUIL_HAUT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="QTTE_TOT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="VOLUME_TOT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="QTE_SANS_BLOC" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="TOT_SANS_BLOC" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="nom" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="login" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="password" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Type="Double" Name="solde" />
+          <NavigationProperty Name="valeurs_client" Relationship="IBDModel.fk_1" FromRole="Client" ToRole="valeurs_client" />
+        </EntityType>
+        <EntityType Name="ValeursClient">
+          <Key>
+            <PropertyRef Name="valeur" />
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Type="String" Name="valeur" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="id_client" Nullable="false" />
+          <Property Type="String" Name="qte" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="cod_valeur" Nullable="false" MaxLength="7" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="client" Relationship="IBDModel.fk_1" FromRole="valeurs_client" ToRole="Client" />
+        </EntityType>
+        <Association Name="fk_1">
+          <End Type="IBDModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="IBDModel.ValeursClient" Role="valeurs_client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="valeurs_client">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IBDModelStoreContainer" CdmEntityContainer="IBEntitiesConnection">
+          <EntitySetMapping Name="valeurs">
+            <EntityTypeMapping TypeName="IBDModel.Valeur">
+              <MappingFragment StoreEntitySet="recap_valeurs">
+                <ScalarProperty Name="SEANCE" ColumnName="SEANCE" />
+                <ScalarProperty Name="GROUPE" ColumnName="GROUPE" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="VALEUR" ColumnName="VALEUR" />
+                <ScalarProperty Name="COURS_REF" ColumnName="COURS_REF" />
+                <ScalarProperty Name="COURS_VEILLE" ColumnName="COURS_VEILLE" />
+                <ScalarProperty Name="OUV" ColumnName="OUV" />
+                <ScalarProperty Name="PLUS_BAS" ColumnName="PLUS_BAS" />
+                <ScalarProperty Name="PLUS_HAUT" ColumnName="PLUS_HAUT" />
+                <ScalarProperty Name="CLOTURE" ColumnName="CLOTURE" />
+                <ScalarProperty Name="P_MOY_POND" ColumnName="P_MOY_POND" />
+                <ScalarProperty Name="I_RES" ColumnName="I_RES" />
+                <ScalarProperty Name="SEUIL_BAS" ColumnName="SEUIL_BAS" />
+                <ScalarProperty Name="SEUIL_HAUT" ColumnName="SEUIL_HAUT" />
+                <ScalarProperty Name="QTTE_TOT" ColumnName="QTTE_TOT" />
+                <ScalarProperty Name="VOLUME_TOT" ColumnName="VOLUME_TOT" />
+                <ScalarProperty Name="QTE_SANS_BLOC" ColumnName="QTE_SANS_BLOC" />
+                <ScalarProperty Name="TOT_SANS_BLOC" ColumnName="TOT_SANS_BLOC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="IBDModel.Client">
+              <MappingFragment StoreEntitySet="clients">
+                <ScalarProperty Name="solde" ColumnName="solde" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValeursClients">
+            <EntityTypeMapping TypeName="IBDModel.ValeursClient">
+              <MappingFragment StoreEntitySet="valeurs_client">
+                <ScalarProperty Name="cod_valeur" ColumnName="cod_valeur" />
+                <ScalarProperty Name="qte" ColumnName="qte" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="valeur" ColumnName="valeur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IBDataBaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="IBDataBaseModelStoreContainer">
+    <EntitySet Name="valeurs" EntityType="IBDataBaseModel.Store.valeurs" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="valeurs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ouverture" Type="decimal" Nullable="false" />
+    <Property Name="haut" Type="decimal" Nullable="false" />
+    <Property Name="bas" Type="decimal" Nullable="false" />
+    <Property Name="cours" Type="decimal" Nullable="false" />
+    <Property Name="dernier" Type="decimal" Nullable="false" />
+    <Property Name="veille" Type="decimal" Nullable="false" />
+    <Property Name="variation" Type="decimal" Nullable="false" />
+  </EntityType>
+</Schema>

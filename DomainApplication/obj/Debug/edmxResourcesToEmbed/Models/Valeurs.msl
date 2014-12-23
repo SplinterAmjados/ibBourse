@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IBDModelStoreContainer" CdmEntityContainer="IBEntitiesConnection">
+    <EntitySetMapping Name="valeurs">
+      <EntityTypeMapping TypeName="IBDModel.Valeur">
+        <MappingFragment StoreEntitySet="recap_valeurs">
+          <ScalarProperty Name="SEANCE" ColumnName="SEANCE" />
+          <ScalarProperty Name="GROUPE" ColumnName="GROUPE" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="VALEUR" ColumnName="VALEUR" />
+          <ScalarProperty Name="COURS_REF" ColumnName="COURS_REF" />
+          <ScalarProperty Name="COURS_VEILLE" ColumnName="COURS_VEILLE" />
+          <ScalarProperty Name="OUV" ColumnName="OUV" />
+          <ScalarProperty Name="PLUS_BAS" ColumnName="PLUS_BAS" />
+          <ScalarProperty Name="PLUS_HAUT" ColumnName="PLUS_HAUT" />
+          <ScalarProperty Name="CLOTURE" ColumnName="CLOTURE" />
+          <ScalarProperty Name="P_MOY_POND" ColumnName="P_MOY_POND" />
+          <ScalarProperty Name="I_RES" ColumnName="I_RES" />
+          <ScalarProperty Name="SEUIL_BAS" ColumnName="SEUIL_BAS" />
+          <ScalarProperty Name="SEUIL_HAUT" ColumnName="SEUIL_HAUT" />
+          <ScalarProperty Name="QTTE_TOT" ColumnName="QTTE_TOT" />
+          <ScalarProperty Name="VOLUME_TOT" ColumnName="VOLUME_TOT" />
+          <ScalarProperty Name="QTE_SANS_BLOC" ColumnName="QTE_SANS_BLOC" />
+          <ScalarProperty Name="TOT_SANS_BLOC" ColumnName="TOT_SANS_BLOC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="IBDModel.Client">
+        <MappingFragment StoreEntitySet="clients">
+          <ScalarProperty Name="solde" ColumnName="solde" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ValeursClients">
+      <EntityTypeMapping TypeName="IBDModel.ValeursClient">
+        <MappingFragment StoreEntitySet="valeurs_client">
+          <ScalarProperty Name="cod_valeur" ColumnName="cod_valeur" />
+          <ScalarProperty Name="qte" ColumnName="qte" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="valeur" ColumnName="valeur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

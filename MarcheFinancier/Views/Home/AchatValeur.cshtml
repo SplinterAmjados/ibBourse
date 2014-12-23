@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "AchatValeur";
+    Layout = "~/Views/_layout.cshtml";
+    ViewBag.passageOrdre = "active";
+
+}
+
+
+@section others_javascripts
+{
+    <script>
+        var valeurs = @Html.Raw(ViewBag.valeurs);
+
+        function getValeurByCode(code)
+        {
+            for (i = 0 ; i< valeurs.length ; i++)
+            {
+                if (valeurs[i].CODE.trim() == code.trim() ) return valeurs[i] ;
+            }
+
+            return null ;
+        }
+
+        
+        document.getElementById('liste_valeurs').options[0] = new Option("Valeur", "0", true, true);
+        for (i = 0 ; i < valeurs.length ; i++) {
+
+            document.getElementById('liste_valeurs').options[i + 1] = new Option(valeurs[i].VALEUR.trim(), valeurs[i].CODE, false, false);
+        }
+
+        function  calculTotal()
+        {
+            var nbre_action = 0 ;
+            var cours = 0 ;
+
+            if ( $('#nbre_actions').val().trim() != '' )
+            {
+                nbre_action = $('#nbre_actions').val() ;
+            }
+
+            if ( $('#cours').val().trim() != '' )
+            {
+                cours = $('#cours').val() ;
+            }
+
+            if ( $('#liste_valeurs').val() == 0 ) 
+            {
+                $('#total').html("");
+            }else
+            {
+                if ( $('#type_ordre').val() == '1'  )
+                {
+                    var resultat = nbre_action * cours ;
+                    $('#total').html(resultat);
+                }
+            }
+        }
+
+
+        $('#liste_valeurs , #nbre_actions').on('change',calculTotal);
+        $(' #nbre_actions , #cours').on('keyup',calculTotal);
+
+    </script>
+
+    <script src="~/Scripts/regles_passage_ordre.js"></script>
+}
+<a href="/Home/PassageOrdre">
+    <div class="banim_right_to_left">
+        <h2  style="text-align: left;"><< Passer un ordre</h2>
+    </div>
+</a>
+<br />
+
+<div>
+    <form enctype="multipart/form-data" action="" method="POST">
+        <div class="wsite-form-container" style="margin-top: 10px;">
+            <ul class="formlist">
+                <h2 class="wsite-content-title" style="text-align: left;">Achat Valeur</h2>
+
+                <div>
+                    <div class="wsite-multicol">
+                        <div class="wsite-multicol-table-wrap" style="margin: 0 -15px;">
+                            <table class="wsite-multicol-table">
+                                <tbody class="wsite-multicol-tbody">
+                                    <tr class="wsite-multicol-tr">
+                                        <td class="wsite-multicol-col" style="width: 50%; padding: 0 15px;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 0px 0px;">
+                                                    <label class="wsite-form-label">Valeur <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-radio-container">
+                                                        <select id="liste_valeurs" class='form-select'>
+                                                        </select>
+
+                                                    </div>
+                                                    <div id="instructions-Valeur" class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="wsite-multicol-col" style="width: 50%; padding: 0 15px;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label">Nombre d'actions <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-input-container">
+                                                        <input class="wsite-form-input wsite-input wsite-input-width-100px" type="number" name="nbre_actions"  id="nbre_actions" />
+                                                    </div>
+                                                    <div class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="wsite-multicol">
+                        <div class="wsite-multicol-table-wrap" style="margin: 0 -15px;">
+                            <table class="wsite-multicol-table">
+                                <tbody class="wsite-multicol-tbody">
+                                    <tr class="wsite-multicol-tr">
+                                        <td class="wsite-multicol-col" style="width: 50%; padding: 0 15px;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label">Type d'odre <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-radio-container">
+                                                        <select id="type_ordre" class='form-select'>
+                                                            <option value='1'>Limité</option>
+                                                            <option value='2'>Au cours d'ouverture</option>
+                                                            <option value='3'>A la meilleur limite</option>
+                                                            <option value='4'>ATP</option>
+                                                            <option value='5'>Stop Loss</option>
+                                                            <option value='6'>Stop Limit</option>
+                                                        </select>
+
+                                                    </div>
+                                                    <div id="instructions-Type d'odre" class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td id="cours_ordre_div" class="wsite-multicol-col" style="padding: 0 15px;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label">Cours <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-input-container">
+                                                        <input class="wsite-form-input wsite-input wsite-input-width-100px" type="text" name="cours" id="cours" /> <b style="margin-left : 5px ; margin-right : 5px ;"> Total</b> <div style="display : inline ;" id="total"> 0  </div> Dinars
+                                                    </div>
+                                                    <div class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td id="valeur_stop_div" style="display: none;">
+                                            <div>
+                                                <div class="wsite-form-field" style="margin: 5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label">Valeur de déclenchement <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-input-container">
+                                                        <input class="wsite-form-input wsite-input wsite-input-width-100px" type="text" name="_u205971197880248636" />
+                                                    </div>
+                                                    <div class="wsite-form-instructions" style="display: none;"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+        <div style="display: none; visibility: hidden;">
+            <input type="text" name="wsite_subject" />
+        </div>
+        <div style="text-align: left; margin-top: 10px; margin-bottom: 10px;">
+            <input type="hidden" name="form_version" value="2" />
+            <input type="hidden" name="wsite_approved" id="wsite-approved" value="approved" />
+            <input type="hidden" name="ucfid" value="848156905816830022" />
+            <input type='submit' style='position: absolute; top: 0; left: -9999px; width: 1px; height: 1px' />
+            <a class='wsite-button' onclick="document.getElementById('form-848156905816830022').submit()"><span class='wsite-button-inner'>Soumettre</span></a>
+        </div>
+    </form>
+
+    <div id="Portefeuille">Vous avez dans votre Portefeuille : <b>@ViewBag.solde </b>  Dinars</div>
+   
+
+</div>
+
+

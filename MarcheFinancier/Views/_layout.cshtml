@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Finance Marche - Home</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" href="~/Content/sites.css" type="text/css" />
+    <link rel='stylesheet' type='text/css' href="~/Content/fancybox.css" />
+    <link rel='stylesheet' type='text/css' href='~/Content/files/main_style.css?1413586769' title='wsite-theme-css' />
+    <link href='~/Content/css1.css' rel='stylesheet' type='text/css' />
+    <link href='~/Content/css2.css' rel='stylesheet' type='text/css' />
+    <link href='~/Content/css3.css' rel='stylesheet' type='text/css' />
+    <link href='~/Content/inlinecss.css' rel="stylesheet" type='text/css' />
+    <link href='~/Content/animation.css' rel="stylesheet" type='text/css' />
+
+    @RenderSection("others_css", required: false);
+
+    <script src='~/Scripts/jquery-1.9.1.js'></script>
+</head>
+<body class='short-header  wsite-theme-light wsite-page-index'>
+    <div id="wrapper">
+        <div class="bg-wrapper">
+            <div id="header">
+                <div id="sitename"><span class='wsite-logo'><a href='index.html'><span id="wsite-title">Finance Marche</span></a></span></div>
+            </div>
+            <div id="navigation">
+                @if (IsSectionDefined("navigation"))
+                {
+                    @RenderSection("navigation")
+                }else
+                {
+                <ul class='wsite-menu-default'>
+                    <li id="@ViewBag.indexActive" ><a href='/'>Index</a></li>
+                    <li id="@ViewBag.cotationsActive"  ><a href="/Home/Cotations">Cotations</a></li>
+                    <li id="@ViewBag.passageOrdre" ><a href='/Home/PassageOrdre'>Passage d'ordre</a></li>
+                    <li id="@ViewBag.analyse" ><a href='#'>Analyse</a></li>
+                </ul>
+                }
+            </div>
+            <div class="banner-wrap wsite-background wsite-custom-background"></div>
+            <div id="content-wrapper">
+                <div id="content">
+                    <div id='wsite-content' class='wsite-elements wsite-not-footer'>
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <div id="footer" style="text-align : right ; margin-top: 100px ;">
+                <div id="footer-content">Projet Modélisation : Marche Financier 2014-2015</div>
+            </div>
+        </div>
+</body>
+</html>
+@RenderSection("others_javascripts",required: false)

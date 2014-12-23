@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IBDataBaseModelStoreContainer" CdmEntityContainer="IBDataBaseEntities">
+    <EntitySetMapping Name="valeurs">
+      <EntityTypeMapping TypeName="IBDataBaseModel.valeur">
+        <MappingFragment StoreEntitySet="valeurs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="ouverture" ColumnName="ouverture" />
+          <ScalarProperty Name="haut" ColumnName="haut" />
+          <ScalarProperty Name="bas" ColumnName="bas" />
+          <ScalarProperty Name="cours" ColumnName="cours" />
+          <ScalarProperty Name="dernier" ColumnName="dernier" />
+          <ScalarProperty Name="veille" ColumnName="veille" />
+          <ScalarProperty Name="variation" ColumnName="variation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

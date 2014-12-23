@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IBDModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="IBEntitiesConnection" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="valeurs" EntityType="IBDModel.Valeur" />
+    <EntitySet Name="Clients" EntityType="IBDModel.Client" />
+    <EntitySet Name="ValeursClients" EntityType="IBDModel.ValeursClient" />
+    <AssociationSet Name="fk_1" Association="IBDModel.fk_1">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="valeurs_client" EntitySet="ValeursClients" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Valeur">
+    <Key>
+      <PropertyRef Name="SEANCE" />
+      <PropertyRef Name="CODE" />
+    </Key>
+    <Property Name="SEANCE" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="GROUPE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CODE" Type="String" Nullable="false" MaxLength="7" Unicode="true" FixedLength="false" />
+    <Property Name="VALEUR" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="COURS_REF" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="COURS_VEILLE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="OUV" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PLUS_BAS" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PLUS_HAUT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CLOTURE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="P_MOY_POND" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="I_RES" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SEUIL_BAS" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SEUIL_HAUT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="QTTE_TOT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="VOLUME_TOT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="QTE_SANS_BLOC" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TOT_SANS_BLOC" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="nom" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="login" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="password" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Type="Double" Name="solde" />
+    <NavigationProperty Name="valeurs_client" Relationship="IBDModel.fk_1" FromRole="Client" ToRole="valeurs_client" />
+  </EntityType>
+  <EntityType Name="ValeursClient">
+    <Key>
+      <PropertyRef Name="valeur" />
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Type="String" Name="valeur" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Type="Int32" Name="id_client" Nullable="false" />
+    <Property Type="String" Name="qte" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="cod_valeur" Nullable="false" MaxLength="7" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="client" Relationship="IBDModel.fk_1" FromRole="valeurs_client" ToRole="Client" />
+  </EntityType>
+  <Association Name="fk_1">
+    <End Type="IBDModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="IBDModel.ValeursClient" Role="valeurs_client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="valeurs_client">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

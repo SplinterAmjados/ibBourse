@@ -1,0 +1,31 @@
+﻿@model MarcheFinancier.Models.User
+
+@{
+    Layout = "~/Views/_layout.cshtml";
+}
+
+@section navigation
+{
+}
+
+
+
+<div style="width: 300px; margin: auto; margin-top: 150px;">
+    <fieldset style="padding: 20px 60px;border: solid 1px;">
+        <legend>Authentification</legend>
+        @try {
+    <div class="errors">
+@ViewBag.erreur
+    </div>
+}catch (Exception e) { }
+        <form method="post" id="form_login">
+            <label class="wsite-form-label">Identifiant<span class="form-required">*</span></label>
+            @Html.TextBoxFor(u => u.Login, new { @class = "wsite-form-input wsite-input", placeholder = "Login" }) <br /><br />
+            <label class="wsite-form-label">Mot de passe<span class="form-required">*</span></label>
+            @Html.TextBoxFor(u => u.Password, new { @class = "wsite-form-input wsite-input", placeholder = "Password" , type = "password" })
+            <br />
+        </form>
+        <a class="wsite-button" onclick="document.getElementById('form_login').submit()"><span class="wsite-button-inner">Connexion</span></a>
+    </fieldset>
+</div>
+

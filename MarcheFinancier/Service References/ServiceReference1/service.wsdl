@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="IBServices" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IibServices_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_GetCotationsJsonList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCotationsJsonList" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_GetCotationsJsonList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCotationsJsonListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_GetClientValeurs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientValeurs" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_GetClientValeurs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientValeursResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_GetSolde_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSolde" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_GetSolde_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSoldeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IibServices">
+    <wsdl:operation name="GetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetData" message="tns:IibServices_GetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/GetDataResponse" message="tns:IibServices_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCotationsJsonList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetCotationsJsonList" message="tns:IibServices_GetCotationsJsonList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/GetCotationsJsonListResponse" message="tns:IibServices_GetCotationsJsonList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientValeurs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetClientValeurs" message="tns:IibServices_GetClientValeurs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/GetClientValeursResponse" message="tns:IibServices_GetClientValeurs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSolde">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetSolde" message="tns:IibServices_GetSolde_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/GetSoldeResponse" message="tns:IibServices_GetSolde_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IibServices" type="tns:IibServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/IibServices/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCotationsJsonList">
+      <soap:operation soapAction="http://tempuri.org/IibServices/GetCotationsJsonList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientValeurs">
+      <soap:operation soapAction="http://tempuri.org/IibServices/GetClientValeurs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSolde">
+      <soap:operation soapAction="http://tempuri.org/IibServices/GetSolde" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IBServices">
+    <wsdl:port name="BasicHttpBinding_IibServices" binding="tns:BasicHttpBinding_IibServices">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/WcfServiceLibrary1/Service1/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

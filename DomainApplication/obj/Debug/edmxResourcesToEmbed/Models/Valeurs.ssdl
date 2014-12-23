@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IBDModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="IBDModelStoreContainer">
+    <EntitySet Name="clients" EntityType="IBDModel.Store.clients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="recap_valeurs" EntityType="IBDModel.Store.recap_valeurs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="valeurs_client" EntityType="IBDModel.Store.valeurs_client" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="fk_1" Association="IBDModel.Store.fk_1">
+      <End Role="clients" EntitySet="clients" />
+      <End Role="valeurs_client" EntitySet="valeurs_client" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="clients">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nom" Type="nchar" MaxLength="50" />
+    <Property Name="login" Type="nchar" MaxLength="20" />
+    <Property Name="password" Type="nchar" MaxLength="60" />
+    <Property Name="solde" Type="float" />
+  </EntityType>
+  <EntityType Name="recap_valeurs">
+    <Key>
+      <PropertyRef Name="SEANCE" />
+      <PropertyRef Name="CODE" />
+    </Key>
+    <Property Name="SEANCE" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="GROUPE" Type="nvarchar" MaxLength="255" />
+    <Property Name="CODE" Type="nvarchar" Nullable="false" MaxLength="7" />
+    <Property Name="VALEUR" Type="nvarchar" MaxLength="50" />
+    <Property Name="COURS_REF" Type="nvarchar" MaxLength="255" />
+    <Property Name="COURS_VEILLE" Type="nvarchar" MaxLength="255" />
+    <Property Name="OUV" Type="nvarchar" MaxLength="255" />
+    <Property Name="PLUS_BAS" Type="nvarchar" MaxLength="255" />
+    <Property Name="PLUS_HAUT" Type="nvarchar" MaxLength="255" />
+    <Property Name="CLOTURE" Type="nvarchar" MaxLength="255" />
+    <Property Name="P_MOY_POND" Type="nvarchar" MaxLength="255" />
+    <Property Name="I_RES" Type="nvarchar" MaxLength="255" />
+    <Property Name="SEUIL_BAS" Type="nvarchar" MaxLength="255" />
+    <Property Name="SEUIL_HAUT" Type="nvarchar" MaxLength="255" />
+    <Property Name="QTTE_TOT" Type="nvarchar" MaxLength="255" />
+    <Property Name="VOLUME_TOT" Type="nvarchar" MaxLength="255" />
+    <Property Name="QTE_SANS_BLOC" Type="nvarchar" MaxLength="255" />
+    <Property Name="TOT_SANS_BLOC" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="valeurs_client">
+    <Key>
+      <PropertyRef Name="valeur" />
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Name="valeur" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="id_client" Type="int" Nullable="false" />
+    <Property Name="qte" Type="nchar" MaxLength="10" />
+    <Property Name="cod_valeur" Type="nchar" Nullable="false" MaxLength="7" />
+  </EntityType>
+  <Association Name="fk_1">
+    <End Role="clients" Type="IBDModel.Store.clients" Multiplicity="1" />
+    <End Role="valeurs_client" Type="IBDModel.Store.valeurs_client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clients">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="valeurs_client">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

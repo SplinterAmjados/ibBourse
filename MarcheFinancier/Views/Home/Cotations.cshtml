@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Cotations";
+    Layout = "~/Views/_layout.cshtml";
+    ViewBag.cotationsActive = "active";
+}
+
+@section others_css {
+    <link href='~/Content/stylesheets.css' rel="stylesheet" type='text/css' />
+    <style>
+        .no {
+            display: none;
+        }
+
+        .boutton_a {
+            background-color: #51A865;
+            text-align: center;
+            vertical-align: middle;
+            padding: 5px 15px;
+            display: inline;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            margin: 5px 5px;
+        }
+
+        .boutton_v {
+            background-color: rgb(146, 21, 21);
+            text-align: center;
+            vertical-align: middle;
+            padding: 5px 15px;
+            display: inline;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            margin: 5px 5px;
+        }
+
+        .boutton_a:hover {
+            background-color: #336E41;
+        }
+
+        .boutton_v:hover {
+            background-color: #CA4242;
+        }
+
+        .boutton_disabled {
+            background-color: #828181 !important;
+            cursor: context-menu;
+        }
+    </style>
+}
+
+
+<br>
+<h2 class="wsite-content-title" style="text-align: left;">Liste des Cotations</h2>
+
+<div class="CSSTable">
+
+    <table id="table_valeurs">
+        <tr>
+            <td>Nom
+            </td>
+            <td>Ouverture
+            </td>
+            <td>Haut
+            </td>
+            <td>Bas
+            </td>
+            <td>Volume(dinars)
+            </td>
+            <td>Cours de Référence
+            </td>
+            <td>Veille
+            </td>
+            <td>Actions
+            </td>
+        </tr>
+       
+    </table>
+
+</div>
+
+<script type="text/javascript">
+    var valeurs = @Html.Raw(ViewBag.valeursList) ;
+    var mesValeurs = @Html.Raw(ViewBag.mesValeurs) ;
+    function formatFloatString(x)
+    {
+        return x.substr(0, x.indexOf('.') + 4);
+    }
+
+
+    function isMaValeur(v)
+    {
+    
+        var j = 0 ;
+        for (j=0 ; j<mesValeurs.length ; j++ )
+        {
+            if ( v.trim() == mesValeurs[j].valeur.trim() ) return true ;
+        }
+        return false;
+    }
+
+    var i = 0 ;
+    for(i = 0 ; i< valeurs.length ; i ++ )
+    {
+    
+        maValeur = " boutton_disabled " ;
+        if (isMaValeur(valeurs[i].VALEUR))
+        {
+            maValeur = " " ;
+        }
+
+    newLine = " <tr>"+
+            "<td class='no'>ATH.ma</td>"+
+            "<td class='allf'><a href='display.aspx?s=ATH.ma'>"+valeurs[i].VALEUR+"</a></td>"+
+            "<td>"+formatFloatString(valeurs[i].OUV)+"</td>"+
+            "<td>"+formatFloatString(valeurs[i].PLUS_HAUT)+"</td>"+
+            "<td>"+formatFloatString(valeurs[i].PLUS_BAS)+"</td>"+
+            "<td>"+formatFloatString(valeurs[i].VOLUME_TOT)+"</td>"+
+           " <td>"+formatFloatString(valeurs[i].COURS_REF)+"</td>"+
+            "<td>"+formatFloatString(valeurs[i].COURS_VEILLE)+"</td>"+
+            "<td>"+
+                "<div class='boutton_a'>Acheter</div>"+
+                "<div class='boutton_v "+maValeur+"'>Vendre</div>"+
+           " </td>"+
+        "</tr>" ;
+
+    $('#table_valeurs').append(newLine);
+     }
+</script>
+
