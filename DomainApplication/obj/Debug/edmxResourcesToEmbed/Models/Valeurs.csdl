@@ -8,6 +8,16 @@
       <End Role="Client" EntitySet="Clients" />
       <End Role="valeurs_client" EntitySet="ValeursClients" />
     </AssociationSet>
+    <EntitySet Name="OrdreAchats" EntityType="IBDModel.OrdreAchat" />
+    <AssociationSet Name="FK_ordre_A_clients" Association="IBDModel.FK_ordre_A_clients">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="ordre_A" EntitySet="OrdreAchats" />
+    </AssociationSet>
+    <EntitySet Name="OrdreVentes" EntityType="IBDModel.OrdreVente" />
+    <AssociationSet Name="FK_ordre_V_clients" Association="IBDModel.FK_ordre_V_clients">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="ordre_V" EntitySet="OrdreVentes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Valeur">
     <Key>
@@ -43,6 +53,9 @@
     <Property Type="String" Name="password" MaxLength="60" FixedLength="true" Unicode="true" />
     <Property Type="Double" Name="solde" />
     <NavigationProperty Name="valeurs_client" Relationship="IBDModel.fk_1" FromRole="Client" ToRole="valeurs_client" />
+    <Property Type="String" Name="type" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="ordre_A" Relationship="IBDModel.FK_ordre_A_clients" FromRole="Client" ToRole="ordre_A" />
+    <NavigationProperty Name="ordre_V" Relationship="IBDModel.FK_ordre_V_clients" FromRole="Client" ToRole="ordre_V" />
   </EntityType>
   <EntityType Name="ValeursClient">
     <Key>
@@ -63,6 +76,62 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="valeurs_client">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OrdreAchat">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="dateTime" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Type="String" Name="code_val" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="Int32" Name="id_client" Nullable="false" />
+    <Property Type="Int32" Name="qte" Nullable="false" />
+    <Property Type="Int32" Name="qte_restante" Nullable="false" />
+    <Property Type="Int32" Name="type" Nullable="false" />
+    <Property Type="Decimal" Name="prix" Precision="18" Scale="4" />
+    <Property Type="String" Name="etat" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="valeur" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="client" Relationship="IBDModel.FK_ordre_A_clients" FromRole="ordre_A" ToRole="Client" />
+  </EntityType>
+  <Association Name="FK_ordre_A_clients">
+    <End Type="IBDModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="IBDModel.OrdreAchat" Role="ordre_A" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ordre_A">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OrdreVente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="dateTime" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="code_val" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="Int32" Name="id_client" Nullable="false" />
+    <Property Type="Int32" Name="qte" Nullable="false" />
+    <Property Type="Int32" Name="qte_restante" Nullable="false" />
+    <Property Type="Int32" Name="type" Nullable="false" />
+    <Property Type="Decimal" Name="prix" Precision="18" Scale="4" />
+    <Property Type="String" Name="etat" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="valeur" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="client" Relationship="IBDModel.FK_ordre_V_clients" FromRole="ordre_V" ToRole="Client" />
+  </EntityType>
+  <Association Name="FK_ordre_V_clients">
+    <End Type="IBDModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="IBDModel.OrdreVente" Role="ordre_V" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ordre_V">
         <PropertyRef Name="id_client" />
       </Dependent>
     </ReferentialConstraint>

@@ -19,67 +19,87 @@ namespace WcfServiceLibrary1
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class IBServices : IibServices
     {
-
-        private SocketInitiator initiator;
-        private QuickFix.SessionSettings settings;
-        private Initiator application;
-        private QuickFix.IMessageStoreFactory storeFactory;
-        private QuickFix.ILogFactory logFactory;
-        private int orderID = 123;
-
+        private ValeursDomain domain;
         public IBServices()
         {
-            try
-            {
-                settings = new QuickFix.SessionSettings(@"C:\Users\Splinter\Documents\visual studio 2012\Projects\AcceptorFix\AcceptorFix\initiator.cfg");
-                application = new Initiator();
-                storeFactory = new QuickFix.FileStoreFactory(settings);
-                logFactory = new QuickFix.ScreenLogFactory(settings);
-                initiator = new QuickFix.Transport.SocketInitiator(application, storeFactory, settings, logFactory);
-                application.MyInitiator = initiator;
-
-                initiator.Start();
-                
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-            }
+            domain = new ValeursDomain();
         }
 
-
-        ~IBServices()
+        public int verifyClient(string login, String password)
         {
-            try { }
-            catch (Exception e) {
-                initiator.Stop();
-            }
+            Client c = domain.getClient(login, password);
+            if (c != null) return c.id;
+            return 0;
         }
 
-        public string GetData(int value)
+        //Type : 1 pour limite , 2 pour atp
+        public void passerOrdreAchatById(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix = 0)
         {
-            return string.Format("You entered: {0}", value);
+            OrdreAchat o = new OrdreAchat();
+            Client c = domain.getClient(idClient);
+
+            o.type = type;
+            o.qte = qte;
+            o.prix = prix;
+            o.code_val = codeValeur;
+            o.client = c ;
+            o.valeur = valeur;
+
+            domain.saveOrdreAchat(o);
+
         }
 
-        public string GetCotationsJsonList()
+        public void passerOrdreAchat(String login, String password, string codeValeur, string valeur, int type, int qte, decimal prix = 0)
         {
-            ValeursDomain domain = new ValeursDomain();
-            List<Valeur> valeurs = domain.list();
-
-            string json = JsonConvert.SerializeObject(valeurs);
-
-            return json;
+            Client c = domain.getClient(login,password);        
+            //appel aux ws pr passer l'ordre
+            if (c != null ) this.passerOrdreAchatById(c.id, codeValeur,valeur, type, qte, prix);
         }
 
-        public string GetClientValeurs(String login, String Password)
+        public void passerOrdreVenteById(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix = 0)
         {
-            ValeursDomain domain = new ValeursDomain();
-            List<ValeursClient> valeurs = domain.getClientValeurs(login, Password);
+            OrdreVente o = new OrdreVente();
+            Client c = domain.getClient(idClient);
+
+            o.type = type;
+            o.qte = qte;
+            o.prix = prix;
+            o.code_val = codeValeur;
+            o.client = c;
+            o.valeur = valeur;
+
+            domain.saveOrdreVente(o);
+        }
+
+        public void passerOrdreVente(String login, String password, string codeValeur, string valeur, int type, int qte, decimal prix = 0)
+        {
+            Client c = domain.getClient(login, password);
+            //appel aux ws pr passer l'ordre
+            if (c != null) this.passerOrdreVenteById(c.id, codeValeur, valeur, type, qte, prix);
+        }
+
+        public double getSoldeById(int idClient)
+        {
+            Client c = domain.getClient(idClient);
+            return (double) c.solde;
+        }
+
+        public double GetSolde(String login, string password)
+        {
+            Client c = domain.getClient(login, password);
+            return (double)c.solde;
+        }
+
+        public string getClientValeursById(int idClient)
+        {
+            Client c = domain.getClient(idClient);
+            if (c == null) return null;
+
+            List<ValeursClient> valeurs = domain.getClientValeurs(c.id);
 
             if (valeurs == null)
             {
-                return "[{}]" ;
+                return "[{}]";
             }
             else
             {
@@ -87,57 +107,85 @@ namespace WcfServiceLibrary1
 
                 return json;
             }
+        }
+
+        public string GetClientValeurs(String login, String password)
+        {
+            Client c = domain.getClient(login, password); // Appel ws pour récupérer le client à partir de son login et son mot de passe
+
+            if (c == null) return null;
+
+            return getClientValeursById(c.id); //Appel ws pour recupérer la liste des valeurs d'un client
 
         }
 
-        public string GetSolde(String login, string password)
+        public string GetCotationsJsonList()
         {
-           // ValeursDomain domain = new ValeursDomain();
-           // String solde = domain.getSolde(login, password);
+            List<Valeur> valeurs = domain.list();
 
+            string json = JsonConvert.SerializeObject(valeurs);
 
-            String solde = "1000,10";
-            if (solde != null) return solde;
-
-            return null;
+            return json;
         }
 
-        /*
-         * 
-         * 
-         * Type => 1 : Limite
-         *      => 2 : Au Cours d'ouverture
-         *      => 3 : A la meilleur Limite
-         *      => 4 : ATP
-         * 
-         * */
-        public string ordreVente(int type, string code_val, decimal cours, int qte, string login, string password)
+
+        //Type ordre : 1 => Ordre Achat , 2 => Ordre Vente
+        public void executerOrdre(long idOrdre, int typeOrdre, int qte, double prix = 0) // WS Orchestrateur bel behi hedha
         {
-            //Appel aux methodes de l'initiator , le retour sera un msg FIX ,   
-            try
+            Ordre o = domain.getOrdre(idOrdre);
+            if (o != null)
             {
-                System.Diagnostics.Debug.WriteLine("Methode ordreVente Appellée");
-                if (application.sendSingleOrdre(""+orderID+"",2, "100", 1, 50, 10.3m))
+                domain.modifierOrdre(o,qte);
+                if (typeOrdre == 1)
                 {
-                    orderID++;
-                    System.Diagnostics.Debug.WriteLine("Execution Ok");
+                    this.debiterSolde(o.id_client, prix * qte); // Appel aux ws pr debiter le solde du client
                 }
-                else 
-                {
-                    System.Diagnostics.Debug.WriteLine("Execution Not Ok");
+                else {
+                    this.crediterSolde(o.id_client, prix * qte); //Appel aux ws pr crediter le solde du client
                 }
             }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("Exception call sendSingleOrdre " + e.ToString());
-            }
-            return null;
+
+
         }
 
-        public string ordreAchat(int type, string code_val, double cours, int qte, string login, string password)
+        public void debiterSolde(int idClient, double montant)
+        {
+            Client c = domain.getClient(idClient);
+
+            if (c != null)
+            {
+                domain.debiterSolde(c.id, montant);            
+            }
+
+        }
+
+        public void crediterSolde(int idClient, double montant)
+        {
+            Client c = domain.getClient(idClient);
+
+            if (c != null)
+            {
+                domain.crediterSolde(c.id, montant);
+            }
+
+        }
+
+
+
+        // WS 5ass lel courbe mte3 les valeurs
+         public string historiqueValeurs(string code)
         {
 
-            return null;
+            List<Valeur> valeurs = domain.getHistoriqueValeur(code);
+
+            string r = "[";
+            foreach (Valeur v in valeurs)
+            {
+                r += "{ \"date\" : \" " + v.SEANCE + "\" ,  \"cours\" : "+v.COURS_REF+" }  ";
+            }
+            r = r + "]";
+
+            return r;
         }
 
     }

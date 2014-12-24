@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcceptorFix", "..\AcceptorF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixInitiator", "..\AcceptorFix\FixInitiator\FixInitiator.csproj", "{507AA887-0B39-41CC-94ED-7137EEF57CAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackOfficeApplication", "BackOfficeApplication\BackOfficeApplication.csproj", "{495840FB-19CC-4F52-8603-1FA0F40C83AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,16 @@ Global
 		{507AA887-0B39-41CC-94ED-7137EEF57CAF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{507AA887-0B39-41CC-94ED-7137EEF57CAF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{507AA887-0B39-41CC-94ED-7137EEF57CAF}.Release|x86.ActiveCfg = Release|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{495840FB-19CC-4F52-8603-1FA0F40C83AB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

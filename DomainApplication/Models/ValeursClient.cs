@@ -9,7 +9,6 @@
 
 namespace DomainApplication.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -20,7 +19,6 @@ namespace DomainApplication.Models
         public string qte { get; set; }
         public string cod_valeur { get; set; }
     
-        [JsonIgnore]
         public virtual Client client { get; set; }
     }
 }

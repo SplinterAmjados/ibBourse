@@ -55,6 +55,13 @@
     <Compile Include="Models\Client.cs">
       <DependentUpon>Valeurs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ordre.cs" />
+    <Compile Include="Models\OrdreAchat.cs">
+      <DependentUpon>Valeurs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrdreVente.cs">
+      <DependentUpon>Valeurs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Valeur.cs">
       <DependentUpon>Valeurs.tt</DependentUpon>
     </Compile>

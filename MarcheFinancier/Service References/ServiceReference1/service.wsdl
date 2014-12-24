@@ -30,6 +30,24 @@
   <wsdl:message name="IibServices_GetSolde_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSoldeResponse" />
   </wsdl:message>
+  <wsdl:message name="IibServices_ordreVente_InputMessage">
+    <wsdl:part name="parameters" element="tns:ordreVente" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_ordreVente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ordreVenteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_ordreAchat_InputMessage">
+    <wsdl:part name="parameters" element="tns:ordreAchat" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_ordreAchat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ordreAchatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_historiqueValeurs_InputMessage">
+    <wsdl:part name="parameters" element="tns:historiqueValeurs" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_historiqueValeurs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:historiqueValeursResponse" />
+  </wsdl:message>
   <wsdl:portType name="IibServices">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetData" message="tns:IibServices_GetData_InputMessage" />
@@ -46,6 +64,18 @@
     <wsdl:operation name="GetSolde">
       <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetSolde" message="tns:IibServices_GetSolde_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IibServices/GetSoldeResponse" message="tns:IibServices_GetSolde_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ordreVente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/ordreVente" message="tns:IibServices_ordreVente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/ordreVenteResponse" message="tns:IibServices_ordreVente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ordreAchat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/ordreAchat" message="tns:IibServices_ordreAchat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/ordreAchatResponse" message="tns:IibServices_ordreAchat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="historiqueValeurs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/historiqueValeurs" message="tns:IibServices_historiqueValeurs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/historiqueValeursResponse" message="tns:IibServices_historiqueValeurs_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IibServices" type="tns:IibServices">
@@ -79,6 +109,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetSolde">
       <soap:operation soapAction="http://tempuri.org/IibServices/GetSolde" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ordreVente">
+      <soap:operation soapAction="http://tempuri.org/IibServices/ordreVente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ordreAchat">
+      <soap:operation soapAction="http://tempuri.org/IibServices/ordreAchat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="historiqueValeurs">
+      <soap:operation soapAction="http://tempuri.org/IibServices/historiqueValeurs" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

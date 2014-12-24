@@ -18,19 +18,7 @@ namespace DomainApplication
 
             //List<Valeur> valeurs = d.list();
 
-            List<ValeursClient> valeurs = d.getClientValeurs("splinter", "splinter");
-
-            if (valeurs == null)
-            {
-                Console.WriteLine("Valeurs => Null " );
-            }
-            else
-            {
-                foreach (ValeursClient v in valeurs)
-                {
-                    Console.WriteLine(v.valeur + " " + v.qte);
-                }
-            }
+            
             Console.ReadKey();
             
         }

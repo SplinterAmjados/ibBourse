@@ -28,6 +28,7 @@
     <EntitySetMapping Name="Clients">
       <EntityTypeMapping TypeName="IBDModel.Client">
         <MappingFragment StoreEntitySet="clients">
+          <ScalarProperty Name="type" ColumnName="type" />
           <ScalarProperty Name="solde" ColumnName="solde" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="login" ColumnName="login" />
@@ -43,6 +44,38 @@
           <ScalarProperty Name="qte" ColumnName="qte" />
           <ScalarProperty Name="id_client" ColumnName="id_client" />
           <ScalarProperty Name="valeur" ColumnName="valeur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdreAchats">
+      <EntityTypeMapping TypeName="IBDModel.OrdreAchat">
+        <MappingFragment StoreEntitySet="ordre_A">
+          <ScalarProperty Name="valeur" ColumnName="valeur" />
+          <ScalarProperty Name="etat" ColumnName="etat" />
+          <ScalarProperty Name="prix" ColumnName="prix" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="qte_restante" ColumnName="qte_restante" />
+          <ScalarProperty Name="qte" ColumnName="qte" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="code_val" ColumnName="code_val" />
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdreVentes">
+      <EntityTypeMapping TypeName="IBDModel.OrdreVente">
+        <MappingFragment StoreEntitySet="ordre_V">
+          <ScalarProperty Name="valeur" ColumnName="valeur" />
+          <ScalarProperty Name="etat" ColumnName="etat" />
+          <ScalarProperty Name="prix" ColumnName="prix" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="qte_restante" ColumnName="qte_restante" />
+          <ScalarProperty Name="qte" ColumnName="qte" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="code_val" ColumnName="code_val" />
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

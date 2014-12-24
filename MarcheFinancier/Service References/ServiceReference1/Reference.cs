@@ -38,6 +38,24 @@ namespace MarcheFinancier.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/GetSolde", ReplyAction="http://tempuri.org/IibServices/GetSoldeResponse")]
         System.Threading.Tasks.Task<string> GetSoldeAsync(string login, string Password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/ordreVente", ReplyAction="http://tempuri.org/IibServices/ordreVenteResponse")]
+        string ordreVente(int type, string code_val, decimal cours, int qte, string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/ordreVente", ReplyAction="http://tempuri.org/IibServices/ordreVenteResponse")]
+        System.Threading.Tasks.Task<string> ordreVenteAsync(int type, string code_val, decimal cours, int qte, string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/ordreAchat", ReplyAction="http://tempuri.org/IibServices/ordreAchatResponse")]
+        string ordreAchat(int type, string code_val, double cours, int qte, string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/ordreAchat", ReplyAction="http://tempuri.org/IibServices/ordreAchatResponse")]
+        System.Threading.Tasks.Task<string> ordreAchatAsync(int type, string code_val, double cours, int qte, string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/historiqueValeurs", ReplyAction="http://tempuri.org/IibServices/historiqueValeursResponse")]
+        string historiqueValeurs(string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/historiqueValeurs", ReplyAction="http://tempuri.org/IibServices/historiqueValeursResponse")]
+        System.Threading.Tasks.Task<string> historiqueValeursAsync(string code);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -97,6 +115,30 @@ namespace MarcheFinancier.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> GetSoldeAsync(string login, string Password) {
             return base.Channel.GetSoldeAsync(login, Password);
+        }
+        
+        public string ordreVente(int type, string code_val, decimal cours, int qte, string login, string password) {
+            return base.Channel.ordreVente(type, code_val, cours, qte, login, password);
+        }
+        
+        public System.Threading.Tasks.Task<string> ordreVenteAsync(int type, string code_val, decimal cours, int qte, string login, string password) {
+            return base.Channel.ordreVenteAsync(type, code_val, cours, qte, login, password);
+        }
+        
+        public string ordreAchat(int type, string code_val, double cours, int qte, string login, string password) {
+            return base.Channel.ordreAchat(type, code_val, cours, qte, login, password);
+        }
+        
+        public System.Threading.Tasks.Task<string> ordreAchatAsync(int type, string code_val, double cours, int qte, string login, string password) {
+            return base.Channel.ordreAchatAsync(type, code_val, cours, qte, login, password);
+        }
+        
+        public string historiqueValeurs(string code) {
+            return base.Channel.historiqueValeurs(code);
+        }
+        
+        public System.Threading.Tasks.Task<string> historiqueValeursAsync(string code) {
+            return base.Channel.historiqueValeursAsync(code);
         }
     }
 }

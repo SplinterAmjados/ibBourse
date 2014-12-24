@@ -17,6 +17,8 @@ namespace DomainApplication.Models
         public Client()
         {
             this.valeurs_client = new HashSet<ValeursClient>();
+            this.ordre_A = new HashSet<OrdreAchat>();
+            this.ordre_V = new HashSet<OrdreVente>();
         }
     
         public int id { get; set; }
@@ -24,7 +26,10 @@ namespace DomainApplication.Models
         public string login { get; set; }
         public string password { get; set; }
         public Nullable<double> solde { get; set; }
+        public string type { get; set; }
     
         public virtual ICollection<ValeursClient> valeurs_client { get; set; }
+        public virtual ICollection<OrdreAchat> ordre_A { get; set; }
+        public virtual ICollection<OrdreVente> ordre_V { get; set; }
     }
 }

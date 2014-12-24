@@ -7,11 +7,21 @@
     <Schema Namespace="IBDModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="IBDModelStoreContainer">
           <EntitySet Name="clients" EntityType="IBDModel.Store.clients" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ordre_A" EntityType="IBDModel.Store.ordre_A" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ordre_V" EntityType="IBDModel.Store.ordre_V" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="recap_valeurs" EntityType="IBDModel.Store.recap_valeurs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="valeurs_client" EntityType="IBDModel.Store.valeurs_client" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="fk_1" Association="IBDModel.Store.fk_1">
             <End Role="clients" EntitySet="clients" />
             <End Role="valeurs_client" EntitySet="valeurs_client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ordre_A_clients" Association="IBDModel.Store.FK_ordre_A_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="ordre_A" EntitySet="ordre_A" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ordre_V_clients" Association="IBDModel.Store.FK_ordre_V_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="ordre_V" EntitySet="ordre_V" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="clients">
@@ -23,6 +33,37 @@
           <Property Name="login" Type="nchar" MaxLength="20" />
           <Property Name="password" Type="nchar" MaxLength="60" />
           <Property Name="solde" Type="float" />
+          <Property Name="type" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ordre_A">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="dateTime" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="code_val" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="qte" Type="int" Nullable="false" />
+          <Property Name="qte_restante" Type="int" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="prix" Type="decimal" Scale="4" />
+          <Property Name="etat" Type="varchar" MaxLength="10" />
+          <Property Name="valeur" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ordre_V">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="dateTime" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="code_val" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="qte" Type="int" Nullable="false" />
+          <Property Name="qte_restante" Type="int" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="prix" Type="decimal" Scale="4" />
+          <Property Name="etat" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="valeur" Type="nchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="recap_valeurs">
           <Key>
@@ -70,6 +111,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ordre_A_clients">
+          <End Role="clients" Type="IBDModel.Store.clients" Multiplicity="1" />
+          <End Role="ordre_A" Type="IBDModel.Store.ordre_A" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ordre_A">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ordre_V_clients">
+          <End Role="clients" Type="IBDModel.Store.clients" Multiplicity="1" />
+          <End Role="ordre_V" Type="IBDModel.Store.ordre_V" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ordre_V">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -81,6 +146,16 @@
           <AssociationSet Name="fk_1" Association="IBDModel.fk_1">
             <End Role="Client" EntitySet="Clients" />
             <End Role="valeurs_client" EntitySet="ValeursClients" />
+          </AssociationSet>
+          <EntitySet Name="OrdreAchats" EntityType="IBDModel.OrdreAchat" />
+          <AssociationSet Name="FK_ordre_A_clients" Association="IBDModel.FK_ordre_A_clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ordre_A" EntitySet="OrdreAchats" />
+          </AssociationSet>
+          <EntitySet Name="OrdreVentes" EntityType="IBDModel.OrdreVente" />
+          <AssociationSet Name="FK_ordre_V_clients" Association="IBDModel.FK_ordre_V_clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ordre_V" EntitySet="OrdreVentes" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Valeur">
@@ -117,6 +192,9 @@
           <Property Type="String" Name="password" MaxLength="60" FixedLength="true" Unicode="true" />
           <Property Type="Double" Name="solde" />
           <NavigationProperty Name="valeurs_client" Relationship="IBDModel.fk_1" FromRole="Client" ToRole="valeurs_client" />
+          <Property Type="String" Name="type" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ordre_A" Relationship="IBDModel.FK_ordre_A_clients" FromRole="Client" ToRole="ordre_A" />
+          <NavigationProperty Name="ordre_V" Relationship="IBDModel.FK_ordre_V_clients" FromRole="Client" ToRole="ordre_V" />
         </EntityType>
         <EntityType Name="ValeursClient">
           <Key>
@@ -137,6 +215,62 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="valeurs_client">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrdreAchat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="dateTime" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Type="String" Name="code_val" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="id_client" Nullable="false" />
+          <Property Type="Int32" Name="qte" Nullable="false" />
+          <Property Type="Int32" Name="qte_restante" Nullable="false" />
+          <Property Type="Int32" Name="type" Nullable="false" />
+          <Property Type="Decimal" Name="prix" Precision="18" Scale="4" />
+          <Property Type="String" Name="etat" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="valeur" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="client" Relationship="IBDModel.FK_ordre_A_clients" FromRole="ordre_A" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_ordre_A_clients">
+          <End Type="IBDModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="IBDModel.OrdreAchat" Role="ordre_A" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ordre_A">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrdreVente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="String" Name="dateTime" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="code_val" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="id_client" Nullable="false" />
+          <Property Type="Int32" Name="qte" Nullable="false" />
+          <Property Type="Int32" Name="qte_restante" Nullable="false" />
+          <Property Type="Int32" Name="type" Nullable="false" />
+          <Property Type="Decimal" Name="prix" Precision="18" Scale="4" />
+          <Property Type="String" Name="etat" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="valeur" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="client" Relationship="IBDModel.FK_ordre_V_clients" FromRole="ordre_V" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_ordre_V_clients">
+          <End Type="IBDModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="IBDModel.OrdreVente" Role="ordre_V" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ordre_V">
               <PropertyRef Name="id_client" />
             </Dependent>
           </ReferentialConstraint>
@@ -174,6 +308,7 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="IBDModel.Client">
               <MappingFragment StoreEntitySet="clients">
+                <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="solde" ColumnName="solde" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="login" ColumnName="login" />
@@ -189,6 +324,38 @@
                 <ScalarProperty Name="qte" ColumnName="qte" />
                 <ScalarProperty Name="id_client" ColumnName="id_client" />
                 <ScalarProperty Name="valeur" ColumnName="valeur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdreAchats">
+            <EntityTypeMapping TypeName="IBDModel.OrdreAchat">
+              <MappingFragment StoreEntitySet="ordre_A">
+                <ScalarProperty Name="valeur" ColumnName="valeur" />
+                <ScalarProperty Name="etat" ColumnName="etat" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="qte_restante" ColumnName="qte_restante" />
+                <ScalarProperty Name="qte" ColumnName="qte" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="code_val" ColumnName="code_val" />
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdreVentes">
+            <EntityTypeMapping TypeName="IBDModel.OrdreVente">
+              <MappingFragment StoreEntitySet="ordre_V">
+                <ScalarProperty Name="valeur" ColumnName="valeur" />
+                <ScalarProperty Name="etat" ColumnName="etat" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="qte_restante" ColumnName="qte_restante" />
+                <ScalarProperty Name="qte" ColumnName="qte" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="code_val" ColumnName="code_val" />
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

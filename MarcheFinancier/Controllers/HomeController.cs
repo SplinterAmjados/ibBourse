@@ -193,5 +193,12 @@ namespace MarcheFinancier.Controllers
         }
 
 
+        [HttpGet]
+        public String HistoriqueValeur(String code)
+        {
+            ServiceReference1.IibServices client = new ServiceReference1.IibServicesClient();
+            return  client.historiqueValeurs(code);
+        }
+
     }
 }

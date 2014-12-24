@@ -12,8 +12,25 @@ namespace WcfServiceLibrary1
     public interface IibServices
     {
         [OperationContract]
-        string GetData(int value);
+        int verifyClient(string login, String password);
 
+        [OperationContract]
+        void passerOrdreAchatById(int idClient, string codeValeur,string valeur, int type, int qte, decimal prix = 0);
+
+        [OperationContract]
+        void passerOrdreAchat(String login, String password, string codeValeur, string valeur, int type, int qte, decimal prix = 0);
+
+        [OperationContract]
+        void passerOrdreVenteById(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix = 0);
+
+        [OperationContract]
+        void passerOrdreVente(String login, String password, string codeValeur, string valeur, int type, int qte, decimal prix = 0);
+
+        [OperationContract]
+        double getSoldeById(int idClient);
+
+        [OperationContract]
+        double GetSolde(String login, string password);
 
         [OperationContract]
         string GetCotationsJsonList();
@@ -23,14 +40,10 @@ namespace WcfServiceLibrary1
         string GetClientValeurs(String login, String Password);
 
         [OperationContract]
-        string GetSolde(String login, String Password);
+        string getClientValeursById(int idClient);
 
         [OperationContract]
-        string ordreVente(int type, string code_val, decimal cours, int qte, string login, string password);
-
-        [OperationContract]
-        string ordreAchat(int type, string code_val, double cours, int qte, string login, string password);
-
+        string historiqueValeurs(string code);
         // TODO: Add your service operations here
     }
 
