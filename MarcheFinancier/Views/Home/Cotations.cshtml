@@ -74,8 +74,12 @@
             </td>
             <td>Veille
             </td>
-            <td>Actions
+            @if (Session["type"].ToString().ToUpper().Trim().Equals("LIBRE"))
+                     {             
+                    <td>Actions
             </td>
+                     }
+            
         </tr>
        
     </table>
@@ -112,7 +116,9 @@
             maValeur = " " ;
         }
 
-    newLine = " <tr>"+
+        @if (Session["type"].ToString().ToUpper().Trim().Equals("LIBRE")){  
+            <text>
+         newLine = " <tr>"+
             "<td class='no'>ATH.ma</td>"+
             "<td class='allf'><a href='display.aspx?s=ATH.ma'>"+valeurs[i].VALEUR+"</a></td>"+
             "<td>"+formatFloatString(valeurs[i].OUV)+"</td>"+
@@ -126,6 +132,21 @@
                 "<div class='boutton_v "+maValeur+"'>Vendre</div>"+
            " </td>"+
         "</tr>" ;
+        </text>
+        }else{
+            <text>
+            newLine = " <tr>" +
+             "<td class='no'>ATH.ma</td>" +
+             "<td class='allf'><a href='display.aspx?s=ATH.ma'>" + valeurs[i].VALEUR + "</a></td>" +
+             "<td>" + formatFloatString(valeurs[i].OUV) + "</td>" +
+             "<td>" + formatFloatString(valeurs[i].PLUS_HAUT) + "</td>" +
+             "<td>" + formatFloatString(valeurs[i].PLUS_BAS) + "</td>" +
+             "<td>" + formatFloatString(valeurs[i].VOLUME_TOT) + "</td>" +
+            " <td>" + formatFloatString(valeurs[i].COURS_REF) + "</td>" +
+             "<td>" + formatFloatString(valeurs[i].COURS_VEILLE) + "</td>" +
+         "</tr>";  
+        </text>
+        }
 
     $('#table_valeurs').append(newLine);
      }

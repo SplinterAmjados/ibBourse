@@ -159,6 +159,7 @@
     <Content Include="Content\Working.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jsapi.js" />
     <Content Include="Scripts\regles_passage_ordre.js" />
     <Content Include="Scripts\scripts.js" />
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
@@ -175,6 +176,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Analyse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,11 +9,17 @@
 
 namespace DomainApplication.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
     public partial class Client
     {
+        [JsonIgnore]
+        public static string TYPE_LIBRE = "libre";
+        [JsonIgnore]
+        public static string TYPE_GERE = "gere";
+
         public Client()
         {
             this.valeurs_client = new HashSet<ValeursClient>();
@@ -28,8 +34,11 @@ namespace DomainApplication.Models
         public Nullable<double> solde { get; set; }
         public string type { get; set; }
     
+        [JsonIgnore]
         public virtual ICollection<ValeursClient> valeurs_client { get; set; }
+        [JsonIgnore]
         public virtual ICollection<OrdreAchat> ordre_A { get; set; }
+        [JsonIgnore]
         public virtual ICollection<OrdreVente> ordre_V { get; set; }
     }
 }

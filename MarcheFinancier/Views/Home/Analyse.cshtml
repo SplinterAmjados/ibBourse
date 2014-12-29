@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Analyse";
+    Layout = "~/Views/_layout.cshtml";
+}
+
+<h2>Analyse</h2>
+
+<div id="chart_div" style="display : none ; width: 900px; height: 500px;"></div>
+<select id="liste_valeurs" class='form-select' onchange="drawChart($('#liste_valeurs').val())" style="width : 200px ; margin-left: 300px;">
+</select>
+
+
+<script type="text/javascript" src="~/Scripts/jsapi.js"></script>
+    <script type="text/javascript">
+
+        //Initialisation de la liste des valeurs
+        var valeurs = @Html.Raw(ViewBag.valeurs);
+        function getValeurByCode(code)
+        {
+            for (i = 0 ; i< valeurs.length ; i++)
+            {
+                if (valeurs[i].CODE.trim() == code.trim() ) return valeurs[i] ;
+            }
+
+            return null ;
+        }      
+        document.getElementById('liste_valeurs').options[0] = new Option("Valeur", "0", true, true);
+        for (i = 0 ; i < valeurs.length ; i++) {
+
+            document.getElementById('liste_valeurs').options[i + 1] = new Option(valeurs[i].VALEUR.trim(), valeurs[i].CODE, false, false);
+        }
+
+
+       //initialisation de la charte
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart(0));
+	  
+	  var v = new Array();
+	  var min = 0 ;
+	  v[0] = [ "Date" , "Cours"] ;
+	  code = 0 ; 
+	  function drawChart(c) {
+	      if (c > 0 ){
+	          $("#chart_div").show();
+	          $.ajax(
+              {
+                  url: "/Home/HistoriqueValeur?code="+c,
+                  type : "get",
+                  dataType : "json",
+                  success : function(valeurs)
+                  {
+                      min =  valeurs[0].cours ;
+                      for ( i = 0 ; i < valeurs.length ; i++)
+                      {
+                          date = new Date(valeurs[i].date.trim());
+                          dateToDisplay = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+                          v[i+1] = new Array(dateToDisplay,valeurs[i].cours) ;
+                          if ( valeurs[i].cours < min ) min = valeurs[i].cours  ;
+                      }
+                      min = min - 1 ;
+                      if (min < 0) min = 0 ;
+					
+                      var data = google.visualization.arrayToDataTable(v);
+
+                      var options = {
+                          title: 'Variation',
+                          hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+                          vAxis: {minValue: min},
+                          series : { 0 : {visibleInLegend  : false} },
+                      };
+
+                      var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+                      chart.draw(data, options);
+                  }
+              }
+              );
+	      }else{
+	          $("#chart_div").hide();
+	      }
+	  }
+	 
+    </script>

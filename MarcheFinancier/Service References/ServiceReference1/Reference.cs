@@ -15,11 +15,47 @@ namespace MarcheFinancier.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IibServices")]
     public interface IibServices {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/GetData", ReplyAction="http://tempuri.org/IibServices/GetDataResponse")]
-        string GetData(int value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/verifyClient", ReplyAction="http://tempuri.org/IibServices/verifyClientResponse")]
+        int verifyClient(string login, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/GetData", ReplyAction="http://tempuri.org/IibServices/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/verifyClient", ReplyAction="http://tempuri.org/IibServices/verifyClientResponse")]
+        System.Threading.Tasks.Task<int> verifyClientAsync(string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/passerOrdreAchatById", ReplyAction="http://tempuri.org/IibServices/passerOrdreAchatByIdResponse")]
+        void passerOrdreAchatById(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/passerOrdreAchatById", ReplyAction="http://tempuri.org/IibServices/passerOrdreAchatByIdResponse")]
+        System.Threading.Tasks.Task passerOrdreAchatByIdAsync(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/passerOrdreAchat", ReplyAction="http://tempuri.org/IibServices/passerOrdreAchatResponse")]
+        void passerOrdreAchat(string login, string password, string codeValeur, string valeur, int type, int qte, decimal prix);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/passerOrdreAchat", ReplyAction="http://tempuri.org/IibServices/passerOrdreAchatResponse")]
+        System.Threading.Tasks.Task passerOrdreAchatAsync(string login, string password, string codeValeur, string valeur, int type, int qte, decimal prix);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/passerOrdreVenteById", ReplyAction="http://tempuri.org/IibServices/passerOrdreVenteByIdResponse")]
+        void passerOrdreVenteById(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/passerOrdreVenteById", ReplyAction="http://tempuri.org/IibServices/passerOrdreVenteByIdResponse")]
+        System.Threading.Tasks.Task passerOrdreVenteByIdAsync(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/passerOrdreVente", ReplyAction="http://tempuri.org/IibServices/passerOrdreVenteResponse")]
+        void passerOrdreVente(string login, string password, string codeValeur, string valeur, int type, int qte, decimal prix);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/passerOrdreVente", ReplyAction="http://tempuri.org/IibServices/passerOrdreVenteResponse")]
+        System.Threading.Tasks.Task passerOrdreVenteAsync(string login, string password, string codeValeur, string valeur, int type, int qte, decimal prix);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/getSoldeById", ReplyAction="http://tempuri.org/IibServices/getSoldeByIdResponse")]
+        double getSoldeById(int idClient);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/getSoldeById", ReplyAction="http://tempuri.org/IibServices/getSoldeByIdResponse")]
+        System.Threading.Tasks.Task<double> getSoldeByIdAsync(int idClient);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/GetSolde", ReplyAction="http://tempuri.org/IibServices/GetSoldeResponse")]
+        double GetSolde(string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/GetSolde", ReplyAction="http://tempuri.org/IibServices/GetSoldeResponse")]
+        System.Threading.Tasks.Task<double> GetSoldeAsync(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/GetCotationsJsonList", ReplyAction="http://tempuri.org/IibServices/GetCotationsJsonListResponse")]
         string GetCotationsJsonList();
@@ -33,29 +69,23 @@ namespace MarcheFinancier.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/GetClientValeurs", ReplyAction="http://tempuri.org/IibServices/GetClientValeursResponse")]
         System.Threading.Tasks.Task<string> GetClientValeursAsync(string login, string Password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/GetSolde", ReplyAction="http://tempuri.org/IibServices/GetSoldeResponse")]
-        string GetSolde(string login, string Password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/getClientValeursById", ReplyAction="http://tempuri.org/IibServices/getClientValeursByIdResponse")]
+        string getClientValeursById(int idClient);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/GetSolde", ReplyAction="http://tempuri.org/IibServices/GetSoldeResponse")]
-        System.Threading.Tasks.Task<string> GetSoldeAsync(string login, string Password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/ordreVente", ReplyAction="http://tempuri.org/IibServices/ordreVenteResponse")]
-        string ordreVente(int type, string code_val, decimal cours, int qte, string login, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/ordreVente", ReplyAction="http://tempuri.org/IibServices/ordreVenteResponse")]
-        System.Threading.Tasks.Task<string> ordreVenteAsync(int type, string code_val, decimal cours, int qte, string login, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/ordreAchat", ReplyAction="http://tempuri.org/IibServices/ordreAchatResponse")]
-        string ordreAchat(int type, string code_val, double cours, int qte, string login, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/ordreAchat", ReplyAction="http://tempuri.org/IibServices/ordreAchatResponse")]
-        System.Threading.Tasks.Task<string> ordreAchatAsync(int type, string code_val, double cours, int qte, string login, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/getClientValeursById", ReplyAction="http://tempuri.org/IibServices/getClientValeursByIdResponse")]
+        System.Threading.Tasks.Task<string> getClientValeursByIdAsync(int idClient);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/historiqueValeurs", ReplyAction="http://tempuri.org/IibServices/historiqueValeursResponse")]
         string historiqueValeurs(string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/historiqueValeurs", ReplyAction="http://tempuri.org/IibServices/historiqueValeursResponse")]
         System.Threading.Tasks.Task<string> historiqueValeursAsync(string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/getType", ReplyAction="http://tempuri.org/IibServices/getTypeResponse")]
+        string getType(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IibServices/getType", ReplyAction="http://tempuri.org/IibServices/getTypeResponse")]
+        System.Threading.Tasks.Task<string> getTypeAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -85,12 +115,60 @@ namespace MarcheFinancier.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
+        public int verifyClient(string login, string password) {
+            return base.Channel.verifyClient(login, password);
         }
         
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
+        public System.Threading.Tasks.Task<int> verifyClientAsync(string login, string password) {
+            return base.Channel.verifyClientAsync(login, password);
+        }
+        
+        public void passerOrdreAchatById(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix) {
+            base.Channel.passerOrdreAchatById(idClient, codeValeur, valeur, type, qte, prix);
+        }
+        
+        public System.Threading.Tasks.Task passerOrdreAchatByIdAsync(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix) {
+            return base.Channel.passerOrdreAchatByIdAsync(idClient, codeValeur, valeur, type, qte, prix);
+        }
+        
+        public void passerOrdreAchat(string login, string password, string codeValeur, string valeur, int type, int qte, decimal prix) {
+            base.Channel.passerOrdreAchat(login, password, codeValeur, valeur, type, qte, prix);
+        }
+        
+        public System.Threading.Tasks.Task passerOrdreAchatAsync(string login, string password, string codeValeur, string valeur, int type, int qte, decimal prix) {
+            return base.Channel.passerOrdreAchatAsync(login, password, codeValeur, valeur, type, qte, prix);
+        }
+        
+        public void passerOrdreVenteById(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix) {
+            base.Channel.passerOrdreVenteById(idClient, codeValeur, valeur, type, qte, prix);
+        }
+        
+        public System.Threading.Tasks.Task passerOrdreVenteByIdAsync(int idClient, string codeValeur, string valeur, int type, int qte, decimal prix) {
+            return base.Channel.passerOrdreVenteByIdAsync(idClient, codeValeur, valeur, type, qte, prix);
+        }
+        
+        public void passerOrdreVente(string login, string password, string codeValeur, string valeur, int type, int qte, decimal prix) {
+            base.Channel.passerOrdreVente(login, password, codeValeur, valeur, type, qte, prix);
+        }
+        
+        public System.Threading.Tasks.Task passerOrdreVenteAsync(string login, string password, string codeValeur, string valeur, int type, int qte, decimal prix) {
+            return base.Channel.passerOrdreVenteAsync(login, password, codeValeur, valeur, type, qte, prix);
+        }
+        
+        public double getSoldeById(int idClient) {
+            return base.Channel.getSoldeById(idClient);
+        }
+        
+        public System.Threading.Tasks.Task<double> getSoldeByIdAsync(int idClient) {
+            return base.Channel.getSoldeByIdAsync(idClient);
+        }
+        
+        public double GetSolde(string login, string password) {
+            return base.Channel.GetSolde(login, password);
+        }
+        
+        public System.Threading.Tasks.Task<double> GetSoldeAsync(string login, string password) {
+            return base.Channel.GetSoldeAsync(login, password);
         }
         
         public string GetCotationsJsonList() {
@@ -109,28 +187,12 @@ namespace MarcheFinancier.ServiceReference1 {
             return base.Channel.GetClientValeursAsync(login, Password);
         }
         
-        public string GetSolde(string login, string Password) {
-            return base.Channel.GetSolde(login, Password);
+        public string getClientValeursById(int idClient) {
+            return base.Channel.getClientValeursById(idClient);
         }
         
-        public System.Threading.Tasks.Task<string> GetSoldeAsync(string login, string Password) {
-            return base.Channel.GetSoldeAsync(login, Password);
-        }
-        
-        public string ordreVente(int type, string code_val, decimal cours, int qte, string login, string password) {
-            return base.Channel.ordreVente(type, code_val, cours, qte, login, password);
-        }
-        
-        public System.Threading.Tasks.Task<string> ordreVenteAsync(int type, string code_val, decimal cours, int qte, string login, string password) {
-            return base.Channel.ordreVenteAsync(type, code_val, cours, qte, login, password);
-        }
-        
-        public string ordreAchat(int type, string code_val, double cours, int qte, string login, string password) {
-            return base.Channel.ordreAchat(type, code_val, cours, qte, login, password);
-        }
-        
-        public System.Threading.Tasks.Task<string> ordreAchatAsync(int type, string code_val, double cours, int qte, string login, string password) {
-            return base.Channel.ordreAchatAsync(type, code_val, cours, qte, login, password);
+        public System.Threading.Tasks.Task<string> getClientValeursByIdAsync(int idClient) {
+            return base.Channel.getClientValeursByIdAsync(idClient);
         }
         
         public string historiqueValeurs(string code) {
@@ -139,6 +201,14 @@ namespace MarcheFinancier.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> historiqueValeursAsync(string code) {
             return base.Channel.historiqueValeursAsync(code);
+        }
+        
+        public string getType(int id) {
+            return base.Channel.getType(id);
+        }
+        
+        public System.Threading.Tasks.Task<string> getTypeAsync(int id) {
+            return base.Channel.getTypeAsync(id);
         }
     }
 }

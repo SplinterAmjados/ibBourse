@@ -6,11 +6,47 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IibServices_GetData_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetData" />
+  <wsdl:message name="IibServices_verifyClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:verifyClient" />
   </wsdl:message>
-  <wsdl:message name="IibServices_GetData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  <wsdl:message name="IibServices_verifyClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:verifyClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_passerOrdreAchatById_InputMessage">
+    <wsdl:part name="parameters" element="tns:passerOrdreAchatById" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_passerOrdreAchatById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:passerOrdreAchatByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_passerOrdreAchat_InputMessage">
+    <wsdl:part name="parameters" element="tns:passerOrdreAchat" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_passerOrdreAchat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:passerOrdreAchatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_passerOrdreVenteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:passerOrdreVenteById" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_passerOrdreVenteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:passerOrdreVenteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_passerOrdreVente_InputMessage">
+    <wsdl:part name="parameters" element="tns:passerOrdreVente" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_passerOrdreVente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:passerOrdreVenteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_getSoldeById_InputMessage">
+    <wsdl:part name="parameters" element="tns:getSoldeById" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_getSoldeById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getSoldeByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_GetSolde_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSolde" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_GetSolde_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSoldeResponse" />
   </wsdl:message>
   <wsdl:message name="IibServices_GetCotationsJsonList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCotationsJsonList" />
@@ -24,23 +60,11 @@
   <wsdl:message name="IibServices_GetClientValeurs_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetClientValeursResponse" />
   </wsdl:message>
-  <wsdl:message name="IibServices_GetSolde_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSolde" />
+  <wsdl:message name="IibServices_getClientValeursById_InputMessage">
+    <wsdl:part name="parameters" element="tns:getClientValeursById" />
   </wsdl:message>
-  <wsdl:message name="IibServices_GetSolde_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSoldeResponse" />
-  </wsdl:message>
-  <wsdl:message name="IibServices_ordreVente_InputMessage">
-    <wsdl:part name="parameters" element="tns:ordreVente" />
-  </wsdl:message>
-  <wsdl:message name="IibServices_ordreVente_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ordreVenteResponse" />
-  </wsdl:message>
-  <wsdl:message name="IibServices_ordreAchat_InputMessage">
-    <wsdl:part name="parameters" element="tns:ordreAchat" />
-  </wsdl:message>
-  <wsdl:message name="IibServices_ordreAchat_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ordreAchatResponse" />
+  <wsdl:message name="IibServices_getClientValeursById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getClientValeursByIdResponse" />
   </wsdl:message>
   <wsdl:message name="IibServices_historiqueValeurs_InputMessage">
     <wsdl:part name="parameters" element="tns:historiqueValeurs" />
@@ -48,10 +72,40 @@
   <wsdl:message name="IibServices_historiqueValeurs_OutputMessage">
     <wsdl:part name="parameters" element="tns:historiqueValeursResponse" />
   </wsdl:message>
+  <wsdl:message name="IibServices_getType_InputMessage">
+    <wsdl:part name="parameters" element="tns:getType" />
+  </wsdl:message>
+  <wsdl:message name="IibServices_getType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getTypeResponse" />
+  </wsdl:message>
   <wsdl:portType name="IibServices">
-    <wsdl:operation name="GetData">
-      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetData" message="tns:IibServices_GetData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/GetDataResponse" message="tns:IibServices_GetData_OutputMessage" />
+    <wsdl:operation name="verifyClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/verifyClient" message="tns:IibServices_verifyClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/verifyClientResponse" message="tns:IibServices_verifyClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="passerOrdreAchatById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/passerOrdreAchatById" message="tns:IibServices_passerOrdreAchatById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/passerOrdreAchatByIdResponse" message="tns:IibServices_passerOrdreAchatById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="passerOrdreAchat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/passerOrdreAchat" message="tns:IibServices_passerOrdreAchat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/passerOrdreAchatResponse" message="tns:IibServices_passerOrdreAchat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="passerOrdreVenteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/passerOrdreVenteById" message="tns:IibServices_passerOrdreVenteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/passerOrdreVenteByIdResponse" message="tns:IibServices_passerOrdreVenteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="passerOrdreVente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/passerOrdreVente" message="tns:IibServices_passerOrdreVente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/passerOrdreVenteResponse" message="tns:IibServices_passerOrdreVente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getSoldeById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/getSoldeById" message="tns:IibServices_getSoldeById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/getSoldeByIdResponse" message="tns:IibServices_getSoldeById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSolde">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetSolde" message="tns:IibServices_GetSolde_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/GetSoldeResponse" message="tns:IibServices_GetSolde_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCotationsJsonList">
       <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetCotationsJsonList" message="tns:IibServices_GetCotationsJsonList_InputMessage" />
@@ -61,27 +115,77 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetClientValeurs" message="tns:IibServices_GetClientValeurs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IibServices/GetClientValeursResponse" message="tns:IibServices_GetClientValeurs_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetSolde">
-      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/GetSolde" message="tns:IibServices_GetSolde_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/GetSoldeResponse" message="tns:IibServices_GetSolde_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ordreVente">
-      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/ordreVente" message="tns:IibServices_ordreVente_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/ordreVenteResponse" message="tns:IibServices_ordreVente_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ordreAchat">
-      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/ordreAchat" message="tns:IibServices_ordreAchat_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/ordreAchatResponse" message="tns:IibServices_ordreAchat_OutputMessage" />
+    <wsdl:operation name="getClientValeursById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/getClientValeursById" message="tns:IibServices_getClientValeursById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/getClientValeursByIdResponse" message="tns:IibServices_getClientValeursById_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="historiqueValeurs">
       <wsdl:input wsaw:Action="http://tempuri.org/IibServices/historiqueValeurs" message="tns:IibServices_historiqueValeurs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IibServices/historiqueValeursResponse" message="tns:IibServices_historiqueValeurs_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IibServices/getType" message="tns:IibServices_getType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IibServices/getTypeResponse" message="tns:IibServices_getType_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IibServices" type="tns:IibServices">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetData">
-      <soap:operation soapAction="http://tempuri.org/IibServices/GetData" style="document" />
+    <wsdl:operation name="verifyClient">
+      <soap:operation soapAction="http://tempuri.org/IibServices/verifyClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="passerOrdreAchatById">
+      <soap:operation soapAction="http://tempuri.org/IibServices/passerOrdreAchatById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="passerOrdreAchat">
+      <soap:operation soapAction="http://tempuri.org/IibServices/passerOrdreAchat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="passerOrdreVenteById">
+      <soap:operation soapAction="http://tempuri.org/IibServices/passerOrdreVenteById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="passerOrdreVente">
+      <soap:operation soapAction="http://tempuri.org/IibServices/passerOrdreVente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSoldeById">
+      <soap:operation soapAction="http://tempuri.org/IibServices/getSoldeById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSolde">
+      <soap:operation soapAction="http://tempuri.org/IibServices/GetSolde" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -107,26 +211,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetSolde">
-      <soap:operation soapAction="http://tempuri.org/IibServices/GetSolde" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ordreVente">
-      <soap:operation soapAction="http://tempuri.org/IibServices/ordreVente" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ordreAchat">
-      <soap:operation soapAction="http://tempuri.org/IibServices/ordreAchat" style="document" />
+    <wsdl:operation name="getClientValeursById">
+      <soap:operation soapAction="http://tempuri.org/IibServices/getClientValeursById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -136,6 +222,15 @@
     </wsdl:operation>
     <wsdl:operation name="historiqueValeurs">
       <soap:operation soapAction="http://tempuri.org/IibServices/historiqueValeurs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getType">
+      <soap:operation soapAction="http://tempuri.org/IibServices/getType" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -44,7 +44,10 @@ namespace WcfServiceLibrary1
 
         [OperationContract]
         string historiqueValeurs(string code);
-        // TODO: Add your service operations here
+
+        [OperationContract]
+        String getType(int id);
+        
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

@@ -84,10 +84,13 @@ namespace WcfServiceLibrary1
             return (double) c.solde;
         }
 
-        public double GetSolde(String login, string password)
+        public double GetSolde(String login,String password)
         {
-            Client c = domain.getClient(login, password);
-            return (double)c.solde;
+            System.Diagnostics.Debug.WriteLine(login + "#  #" + password + "#");
+            Client c = domain.getClient(login,password);
+            
+
+            return (double) c.solde;
         }
 
         public string getClientValeursById(int idClient)
@@ -170,7 +173,10 @@ namespace WcfServiceLibrary1
 
         }
 
-
+        public String getType(int id)
+        {
+            return domain.getType(id);
+        }
 
         // WS 5ass lel courbe mte3 les valeurs
          public string historiqueValeurs(string code)
@@ -181,8 +187,9 @@ namespace WcfServiceLibrary1
             string r = "[";
             foreach (Valeur v in valeurs)
             {
-                r += "{ \"date\" : \" " + v.SEANCE + "\" ,  \"cours\" : "+v.COURS_REF+" }  ";
+                r += "{ \"date\" : \" " + v.SEANCE + "\" ,  \"cours\" : "+v.COURS_REF+" },";
             }
+            r=  r.Remove(r.Length-1);
             r = r + "]";
 
             return r;

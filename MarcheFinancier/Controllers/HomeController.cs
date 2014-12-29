@@ -13,6 +13,33 @@ namespace MarcheFinancier.Controllers
     public class HomeController : Controller
     {
 
+        ServiceReference1.IibServices client ; 
+
+        public HomeController()
+        {
+        client = new ServiceReference1.IibServicesClient();  
+        }
+
+        private void verifyUser()
+        {
+
+            if (Session["login"] == null 
+                || Session["password"] == null 
+                || Session["login"].ToString().Trim() == "" 
+                || Session["password"].ToString().Trim() == ""
+                || Session["type"].ToString().Trim() == ""
+                || Session["type"].ToString().Trim() == "")
+            {
+                FormsAuthentication.SignOut();
+                Response.Redirect("/Login");
+            }
+        }
+
+        private void verifyLibreUser()
+        {
+            if (Session["type"] == "gere") Response.Redirect("/");
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Login()
@@ -27,15 +54,17 @@ namespace MarcheFinancier.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(User user,string returnUrl)
+        public ActionResult Login(User user,string returnUrl = "/")
         {
-            //Remplacer par un test sur une base de données
-            if (user.Login == "splinter" && user.Password == "splinter")
+           int idCLient = client.verifyClient(user.Login, user.Password) ;
+            if ( idCLient > 0)
             {
                 FormsAuthentication.SetAuthCookie(user.Login, false);
+
                 Session["login"] =  user.Login.ToString();
                 Session["password"] =  user.Password.ToString();
-                
+                Session["type"] = client.getType(idCLient);             
+
                 Response.Redirect(returnUrl,false);
             }
 
@@ -48,7 +77,8 @@ namespace MarcheFinancier.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-
+            verifyUser();
+            System.Diagnostics.Debug.WriteLine(Session["type"]);
             return View();
         }
 
@@ -57,7 +87,7 @@ namespace MarcheFinancier.Controllers
         [HttpGet]
         public ActionResult Cotations()
         {
-            ServiceReference1.IibServices client = new ServiceReference1.IibServicesClient();
+            verifyUser();
             ViewBag.valeursList = client.GetCotationsJsonList();
 
             String mesValeurs = null;
@@ -81,6 +111,8 @@ namespace MarcheFinancier.Controllers
         [HttpGet]
         public ActionResult PassageOrdre()
         {
+            verifyUser();
+            verifyLibreUser();
             System.Diagnostics.Debug.WriteLine("User " + Session["login"] + "Password " + (string)Session["password"]);
             return View();
         }
@@ -88,8 +120,10 @@ namespace MarcheFinancier.Controllers
         [HttpGet]
         public ActionResult AchatValeur()
         {
-            ServiceReference1.IibServices client = new ServiceReference1.IibServicesClient();
+            verifyUser();
+            verifyLibreUser();
             ViewBag.valeurs = client.GetCotationsJsonList();
+            //System.Diagnostics.Debug.WriteLine("User " + Session["login"] + "Password " + Session["password"].ToString());
             ViewBag.solde = client.GetSolde(Session["login"].ToString(), Session["password"].ToString());
             return View();
         }
@@ -99,11 +133,11 @@ namespace MarcheFinancier.Controllers
         [HttpGet]
         public ActionResult VenteValeur()
         {
-            
+            verifyUser();
+            verifyLibreUser();
             String mesValeurs = null;
             if (Session["mesValeurs"] == null)
             {
-                ServiceReference1.IibServices client = new ServiceReference1.IibServicesClient();
                 mesValeurs = client.GetClientValeurs(Session["login"].ToString(), Session["password"].ToString());
                 Session["mesValeurs"] = mesValeurs;
             }
@@ -120,6 +154,8 @@ namespace MarcheFinancier.Controllers
         [HttpPost]
         public ActionResult VenteValeurPost()
         {
+            verifyUser();
+            verifyLibreUser();
             List<String> erreurs = new List<String>();
 
             string code_val = Request["valeur"];
@@ -175,7 +211,6 @@ namespace MarcheFinancier.Controllers
                 String mesValeurs = null;
                 if (Session["mesValeurs"] == null)
                 {
-                    ServiceReference1.IibServices client = new ServiceReference1.IibServicesClient();
                     mesValeurs = client.GetClientValeurs(Session["login"].ToString(), Session["password"].ToString());
                     Session["mesValeurs"] = mesValeurs;
                 }
@@ -196,8 +231,16 @@ namespace MarcheFinancier.Controllers
         [HttpGet]
         public String HistoriqueValeur(String code)
         {
-            ServiceReference1.IibServices client = new ServiceReference1.IibServicesClient();
+            verifyUser();
             return  client.historiqueValeurs(code);
+        }
+
+
+        public ActionResult Analyse()
+        {
+            verifyUser();
+            ViewBag.valeurs = client.GetCotationsJsonList();
+            return View();
         }
 
     }

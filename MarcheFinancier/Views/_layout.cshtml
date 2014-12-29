@@ -14,7 +14,7 @@
     <link href='~/Content/inlinecss.css' rel="stylesheet" type='text/css' />
     <link href='~/Content/animation.css' rel="stylesheet" type='text/css' />
 
-    @RenderSection("others_css", required: false);
+    @RenderSection("others_css", required: false)
 
     <script src='~/Scripts/jquery-1.9.1.js'></script>
 </head>
@@ -33,8 +33,12 @@
                 <ul class='wsite-menu-default'>
                     <li id="@ViewBag.indexActive" ><a href='/'>Index</a></li>
                     <li id="@ViewBag.cotationsActive"  ><a href="/Home/Cotations">Cotations</a></li>
+                       
+                     @if (Session["type"] != null &&  Session["type"].ToString().ToUpper().Trim().Equals("LIBRE"))
+                     {             
                     <li id="@ViewBag.passageOrdre" ><a href='/Home/PassageOrdre'>Passage d'ordre</a></li>
-                    <li id="@ViewBag.analyse" ><a href='#'>Analyse</a></li>
+                     }
+                    <li id="@ViewBag.analyse" ><a href='/Home/Analyse'>Analyse</a></li>
                 </ul>
                 }
             </div>

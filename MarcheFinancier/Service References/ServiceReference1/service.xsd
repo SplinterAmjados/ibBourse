@@ -1,16 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="GetData">
+  <xs:element name="verifyClient">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="value" type="xs:int" />
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDataResponse">
+  <xs:element name="verifyClientResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetDataResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="verifyClientResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="passerOrdreAchatById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idClient" type="xs:int" />
+        <xs:element minOccurs="0" name="codeValeur" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="valeur" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="type" type="xs:int" />
+        <xs:element minOccurs="0" name="qte" type="xs:int" />
+        <xs:element minOccurs="0" name="prix" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="passerOrdreAchatByIdResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="passerOrdreAchat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="codeValeur" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="valeur" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="type" type="xs:int" />
+        <xs:element minOccurs="0" name="qte" type="xs:int" />
+        <xs:element minOccurs="0" name="prix" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="passerOrdreAchatResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="passerOrdreVenteById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idClient" type="xs:int" />
+        <xs:element minOccurs="0" name="codeValeur" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="valeur" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="type" type="xs:int" />
+        <xs:element minOccurs="0" name="qte" type="xs:int" />
+        <xs:element minOccurs="0" name="prix" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="passerOrdreVenteByIdResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="passerOrdreVente">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="codeValeur" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="valeur" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="type" type="xs:int" />
+        <xs:element minOccurs="0" name="qte" type="xs:int" />
+        <xs:element minOccurs="0" name="prix" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="passerOrdreVenteResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getSoldeById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idClient" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getSoldeByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="getSoldeByIdResult" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSolde">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSoldeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSoldeResult" type="xs:double" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -41,56 +141,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetSolde">
+  <xs:element name="getClientValeursById">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idClient" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetSoldeResponse">
+  <xs:element name="getClientValeursByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetSoldeResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ordreVente">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="type" type="xs:int" />
-        <xs:element minOccurs="0" name="code_val" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cours" type="xs:decimal" />
-        <xs:element minOccurs="0" name="qte" type="xs:int" />
-        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ordreVenteResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="ordreVenteResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ordreAchat">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="type" type="xs:int" />
-        <xs:element minOccurs="0" name="code_val" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cours" type="xs:double" />
-        <xs:element minOccurs="0" name="qte" type="xs:int" />
-        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ordreAchatResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="ordreAchatResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="getClientValeursByIdResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -105,6 +166,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="historiqueValeursResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="getTypeResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

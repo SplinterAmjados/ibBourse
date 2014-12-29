@@ -26,10 +26,11 @@ namespace DomainApplication.Domain
         {
             try
             {
-                return this.context.Clients.Where(c => c.login == login && c.password == password).First();
+                return this.context.Clients.Where(c => c.login == login && c.password == password).FirstOrDefault();
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("here");
                 return null;
             }
         }
@@ -127,7 +128,7 @@ namespace DomainApplication.Domain
 
         public List<Valeur> getHistoriqueValeur(string code)
         {
-            return context.valeurs.Where(e => e.CODE == code).ToList();
+            return context.valeurs.Where(e => e.CODE == code).OrderByDescending(e => e.SEANCE ).Take(6).ToList();
         }
 
 
@@ -149,6 +150,12 @@ namespace DomainApplication.Domain
             context.OrdreVentes.Add(o);
             context.SaveChanges();
             
+        }
+
+        public string getType(int id)
+        {
+           Client c = context.Clients.Find(id);
+           return c.type ;
         }
 
     }
