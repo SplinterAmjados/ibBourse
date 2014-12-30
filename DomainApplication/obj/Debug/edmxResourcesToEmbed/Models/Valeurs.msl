@@ -37,16 +37,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ValeursClients">
-      <EntityTypeMapping TypeName="IBDModel.ValeursClient">
-        <MappingFragment StoreEntitySet="valeurs_client">
-          <ScalarProperty Name="cod_valeur" ColumnName="cod_valeur" />
-          <ScalarProperty Name="qte" ColumnName="qte" />
-          <ScalarProperty Name="id_client" ColumnName="id_client" />
-          <ScalarProperty Name="valeur" ColumnName="valeur" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OrdreAchats">
       <EntityTypeMapping TypeName="IBDModel.OrdreAchat">
         <MappingFragment StoreEntitySet="ordre_A">
@@ -76,6 +66,16 @@
           <ScalarProperty Name="code_val" ColumnName="code_val" />
           <ScalarProperty Name="dateTime" ColumnName="dateTime" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ValeursClients1">
+      <EntityTypeMapping TypeName="IBDModel.ValeursClient">
+        <MappingFragment StoreEntitySet="valeurs_client">
+          <ScalarProperty Name="cod_valeur" ColumnName="cod_valeur" />
+          <ScalarProperty Name="qte" ColumnName="qte" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="valeur" ColumnName="valeur" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

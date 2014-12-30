@@ -7,12 +7,12 @@
       <Diagram DiagramId="2e4d77a3648f46fdbba301c4a972d214" Name="Diagram1" ZoomLevel="75">
         <EntityTypeShape EntityType="IBDModel.Valeur" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IBDModel.Client" Width="1.5" PointX="6.5" PointY="0.875" />
-        <EntityTypeShape EntityType="IBDModel.ValeursClient" Width="1.5" PointX="9.125" PointY="1.625" />
-        <AssociationConnector Association="IBDModel.fk_1" />
         <EntityTypeShape EntityType="IBDModel.OrdreAchat" Width="1.5" PointX="3.375" PointY="1.125" />
         <AssociationConnector Association="IBDModel.FK_ordre_A_clients" />
         <EntityTypeShape EntityType="IBDModel.OrdreVente" Width="1.5" PointX="6.375" PointY="4.375" />
         <AssociationConnector Association="IBDModel.FK_ordre_V_clients" />
+        <EntityTypeShape EntityType="IBDModel.ValeursClient" Width="1.5" PointX="9.875" PointY="2.125" />
+        <AssociationConnector Association="IBDModel.fk_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

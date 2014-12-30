@@ -27,8 +27,8 @@ namespace DomainApplication.Models
     
         public DbSet<Valeur> valeurs { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<ValeursClient> ValeursClients { get; set; }
         public DbSet<OrdreAchat> OrdreAchats { get; set; }
         public DbSet<OrdreVente> OrdreVentes { get; set; }
+        public DbSet<ValeursClient> ValeursClients1 { get; set; }
     }
 }

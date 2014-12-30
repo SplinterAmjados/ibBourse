@@ -14,6 +14,6 @@ namespace DomainApplication.Models
     
     public partial class OrdreAchat : Ordre
     {
-        
+
     }
 }

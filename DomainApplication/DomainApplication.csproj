@@ -92,6 +92,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Valeurs.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Models\Valeurs.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Valeurs.edmx</DependentUpon>

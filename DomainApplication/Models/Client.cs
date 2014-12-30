@@ -15,16 +15,11 @@ namespace DomainApplication.Models
     
     public partial class Client
     {
-        [JsonIgnore]
-        public static string TYPE_LIBRE = "libre";
-        [JsonIgnore]
-        public static string TYPE_GERE = "gere";
-
         public Client()
         {
-            this.valeurs_client = new HashSet<ValeursClient>();
             this.ordre_A = new HashSet<OrdreAchat>();
             this.ordre_V = new HashSet<OrdreVente>();
+            this.valeurs_client = new HashSet<ValeursClient>();
         }
     
         public int id { get; set; }
@@ -35,10 +30,10 @@ namespace DomainApplication.Models
         public string type { get; set; }
     
         [JsonIgnore]
-        public virtual ICollection<ValeursClient> valeurs_client { get; set; }
-        [JsonIgnore]
         public virtual ICollection<OrdreAchat> ordre_A { get; set; }
         [JsonIgnore]
         public virtual ICollection<OrdreVente> ordre_V { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<ValeursClient> valeurs_client { get; set; }
     }
 }

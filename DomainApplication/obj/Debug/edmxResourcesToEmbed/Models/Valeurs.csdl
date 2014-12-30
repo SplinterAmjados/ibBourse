@@ -3,11 +3,6 @@
   <EntityContainer Name="IBEntitiesConnection" p1:LazyLoadingEnabled="true">
     <EntitySet Name="valeurs" EntityType="IBDModel.Valeur" />
     <EntitySet Name="Clients" EntityType="IBDModel.Client" />
-    <EntitySet Name="ValeursClients" EntityType="IBDModel.ValeursClient" />
-    <AssociationSet Name="fk_1" Association="IBDModel.fk_1">
-      <End Role="Client" EntitySet="Clients" />
-      <End Role="valeurs_client" EntitySet="ValeursClients" />
-    </AssociationSet>
     <EntitySet Name="OrdreAchats" EntityType="IBDModel.OrdreAchat" />
     <AssociationSet Name="FK_ordre_A_clients" Association="IBDModel.FK_ordre_A_clients">
       <End Role="Client" EntitySet="Clients" />
@@ -17,6 +12,11 @@
     <AssociationSet Name="FK_ordre_V_clients" Association="IBDModel.FK_ordre_V_clients">
       <End Role="Client" EntitySet="Clients" />
       <End Role="ordre_V" EntitySet="OrdreVentes" />
+    </AssociationSet>
+    <EntitySet Name="ValeursClients1" EntityType="IBDModel.ValeursClient" />
+    <AssociationSet Name="fk_1" Association="IBDModel.fk_1">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="valeurs_client" EntitySet="ValeursClients1" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Valeur">
@@ -52,34 +52,11 @@
     <Property Type="String" Name="login" MaxLength="20" FixedLength="true" Unicode="true" />
     <Property Type="String" Name="password" MaxLength="60" FixedLength="true" Unicode="true" />
     <Property Type="Double" Name="solde" />
-    <NavigationProperty Name="valeurs_client" Relationship="IBDModel.fk_1" FromRole="Client" ToRole="valeurs_client" />
     <Property Type="String" Name="type" MaxLength="10" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="ordre_A" Relationship="IBDModel.FK_ordre_A_clients" FromRole="Client" ToRole="ordre_A" />
     <NavigationProperty Name="ordre_V" Relationship="IBDModel.FK_ordre_V_clients" FromRole="Client" ToRole="ordre_V" />
+    <NavigationProperty Name="valeurs_client" Relationship="IBDModel.fk_1" FromRole="Client" ToRole="valeurs_client" />
   </EntityType>
-  <EntityType Name="ValeursClient">
-    <Key>
-      <PropertyRef Name="valeur" />
-      <PropertyRef Name="id_client" />
-    </Key>
-    <Property Type="String" Name="valeur" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Type="Int32" Name="id_client" Nullable="false" />
-    <Property Type="String" Name="qte" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Type="String" Name="cod_valeur" Nullable="false" MaxLength="7" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="client" Relationship="IBDModel.fk_1" FromRole="valeurs_client" ToRole="Client" />
-  </EntityType>
-  <Association Name="fk_1">
-    <End Type="IBDModel.Client" Role="Client" Multiplicity="1" />
-    <End Type="IBDModel.ValeursClient" Role="valeurs_client" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Client">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="valeurs_client">
-        <PropertyRef Name="id_client" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="OrdreAchat">
     <Key>
       <PropertyRef Name="id" />
@@ -132,6 +109,29 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="ordre_V">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ValeursClient">
+    <Key>
+      <PropertyRef Name="valeur" />
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Type="String" Name="valeur" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Type="Int32" Name="id_client" Nullable="false" />
+    <Property Type="Int32" Name="qte" />
+    <Property Type="String" Name="cod_valeur" Nullable="false" MaxLength="7" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="client" Relationship="IBDModel.fk_1" FromRole="valeurs_client" ToRole="Client" />
+  </EntityType>
+  <Association Name="fk_1">
+    <End Type="IBDModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="IBDModel.ValeursClient" Role="valeurs_client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="valeurs_client">
         <PropertyRef Name="id_client" />
       </Dependent>
     </ReferentialConstraint>

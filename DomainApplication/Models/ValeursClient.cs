@@ -17,9 +17,9 @@ namespace DomainApplication.Models
     {
         public string valeur { get; set; }
         public int id_client { get; set; }
-        public string qte { get; set; }
+        public Nullable<int> qte { get; set; }
         public string cod_valeur { get; set; }
-
+    
         [JsonIgnore]
         public virtual Client client { get; set; }
     }
